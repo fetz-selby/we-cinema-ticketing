@@ -1,5 +1,4 @@
 import express from 'express';
-import request from 'request';
     
 export default class AuditoriumRoutes{
 

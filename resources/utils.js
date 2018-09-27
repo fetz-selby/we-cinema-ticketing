@@ -19,3 +19,18 @@ export function isNumbers(text){
 
     return !(_.includes(result, false));
 }
+
+export function getExpiry(hours){
+    let date = new Date();
+    date.setMinutes(new Date().getMinutes()+(60*hours));
+
+    return date;
+}
+
+export function generateCode() {
+    let firstPart = (Math.random() * 46656) | 0;
+    let secondPart = (Math.random() * 46656) | 0;
+    firstPart = ("000" + firstPart.toString(36)).slice(-3);
+    secondPart = ("000" + secondPart.toString(36)).slice(-3);
+    return firstPart + secondPart;
+}

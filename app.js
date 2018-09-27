@@ -16,11 +16,13 @@ import Seat from './models/seatModel';
 import Movie from './models/movieModel';
 import Purchase from './models/purchasesModel';
 import Customer from './models/customerDetailModel';
+import Secure from './models/secureSeatModel';
 
 //Routers
 import AuditoriumRouter from './routers/auditoriumRouter';
 import MovieRouter from './routers/movieRouter';
 import BookRouter from './routers/bookRouter';
+import SecureRouter from './routers/secureRouter';
 
 
 export default class App {
@@ -134,9 +136,11 @@ export default class App {
         const movieModel = new Movie().model(db);
         const purchaseModel = new Purchase().model(db);
         const customerModel = new Customer().model(db);
+        const secureModel = new Secure().model(db);
 
         auditoriumModel.belongsTo(movieModel);
         seatModel.belongsTo(auditoriumModel);
+        secureModel.belongsTo(seatModel);
 
         purchaseModel.belongsTo(seatModel);
         purchaseModel.belongsTo(customerModel);
@@ -147,7 +151,8 @@ export default class App {
         //Init Routers
         const auditoriumRouter = new AuditoriumRouter(auditoriumModel, seatModel, movieModel);
         const movieRouter = new MovieRouter(auditoriumModel, movieModel, seatModel);
-        const bookRouter = new BookRouter(customerModel, purchaseModel, seatModel);
+        const bookRouter = new BookRouter(customerModel, purchaseModel, seatModel, secureModel);
+        const secureRouter = new SecureRouter(seatModel, secureModel);
 
         //Init DB
         if(d.config.prepare){          
@@ -159,7 +164,7 @@ export default class App {
         app.use('/wibas-eterate/ticket/api/v1/movies', movieRouter.routes()); 
         app.use('/wibas-eterate/ticket/api/v1/auditoria', auditoriumRouter.routes()); 
         app.use('/wibas-eterate/ticket/api/v1/purchase_ticket', bookRouter.routes()); 
-
+        app.use('/wibas-eterate/ticket/api/v1/secure_ticket', secureRouter.routes()); 
     }
 
     finalize(app){

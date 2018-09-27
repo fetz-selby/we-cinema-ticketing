@@ -18,7 +18,7 @@ export default class SeatModel{
                 },
                 status: {
                     type : Sequelize.ENUM,
-                    values : ['E', 'B', 'A'],
+                    values : ['P', 'B', 'A'],
                     defaultValue : ['A']
                 }
             }, {underscored: true});
