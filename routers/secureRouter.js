@@ -7,9 +7,10 @@ import jwt from 'jsonwebtoken';
     
 export default class SecureRoutes{
 
-    constructor(SeatModel, SecureModel){
+    constructor(SeatModel, SecureModel, AuditoriumModel){
         this.SeatModel = SeatModel;
         this.SecureModel = SecureModel;
+        this.AuditoriumModel = AuditoriumModel;
     }
 
     routes(){
@@ -63,7 +64,13 @@ export default class SecureRoutes{
                 if(!seat){
                     throw 'seat id invalid'
                 }
-                cost += seat.price;
+
+                let seatCost = await app.AuditoriumModel.findOne({where: {id: seat.auditorium_id, status: 'A'}});
+                if(seatCost){
+                    cost += seatCost.price;
+                }else{
+                    throw 'seat cost not found'
+                }
             }
         }catch(err){
             res.status(400)
@@ -124,6 +131,6 @@ export default class SecureRoutes{
         const expressApp = express();
         expressApp.set('token', appConfig.config.secret);
 
-       return jwt.sign({data: appConfig.config.secret}, expressApp.get('token'), {expiresIn: '1hr'});
+       return jwt.sign({data: appConfig.config.secret}, expressApp.get('token'), {expiresIn: (appConfig.config.seat_secure_timer*60)});
     }
 }

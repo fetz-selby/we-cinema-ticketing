@@ -25,6 +25,9 @@ export default class AuditoriumModel{
                 y_size:{
                     type: Sequelize.INTEGER
                 },
+                price: {
+                    type: Sequelize.DOUBLE
+                },
                 status: {
                     type: Sequelize.STRING(1),
                     defaultValue:'A'

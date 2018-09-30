@@ -57,11 +57,12 @@ export default class AuditoriumRoutes{
                 const time = auditorium.time;
                 const size = {x_size: auditorium.x_size, y_size: auditorium.y_size};
                 const movie_name = auditorium.movie.name;
+                const price = auditorium.price;
 
-                let seats = await app.SeatModel.findAll({where : {auditorium_id}, attributes: ['id', 'row', 'column', 'price', 'status']});
+                let seats = await app.SeatModel.findAll({where : {auditorium_id}, attributes: ['id', 'row', 'column', 'status']});
                 
                 //Do not show auditorium without movie schedule
-                if(seats.length > 0){
+                if(seats){
                     result.push( {
                         auditorium_id,
                         movie_id,
@@ -69,6 +70,7 @@ export default class AuditoriumRoutes{
                         day,
                         time,
                         size,
+                        price,
                         seats
                     })
                 }
@@ -104,11 +106,12 @@ export default class AuditoriumRoutes{
             const time = auditorium.time;
             const size = {x_size: auditorium.x_size, y_size: auditorium.y_size};
             const movie_name = auditorium.movie.name;
+            const price = auditorium.price;
 
-            let seats = await app.SeatModel.findAll({where : {auditorium_id}, attributes: ['id', 'row', 'column', 'price', 'status']});
+            let seats = await app.SeatModel.findAll({where : {auditorium_id}, attributes: ['id', 'row', 'column', 'status']});
             
             //Do not show auditorium without movie schedule
-            if(seats.length > 0){
+            if(seats){
                 result.push( {
                     auditorium_id,
                     movie_id,
@@ -116,6 +119,7 @@ export default class AuditoriumRoutes{
                     day,
                     time,
                     size,
+                    price,
                     seats
                 })
             }

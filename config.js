@@ -1,12 +1,12 @@
 require('dotenv').config();
 var Sequelize = require('sequelize');
-// var path = require('path');
 
 const config = {
-    IP : process.env.SERVER_IP || 'http://hrcf.icassetmanagers.com',
-    PORT:process.env.SERVER_PORT || 80,
+    IP : process.env.SERVER_IP,
     SERVER_PORT : process.env.LOCAL_PORT || 8001,
     secret : 'thequickfoxjumpedofthelazydog',
+    cron_timer: 30,
+    seat_secure_timer: 30,
     prepare : true
 }
 

@@ -10,9 +10,6 @@ export default class SeatModel{
                 column: {
                     type: Sequelize.INTEGER
                 },
-                price: {
-                    type : Sequelize.DOUBLE
-                },
                 auditorium_id:{
                     type : Sequelize.INTEGER
                 },

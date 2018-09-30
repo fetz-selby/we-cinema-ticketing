@@ -3,12 +3,9 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import session from 'express-session';
-
-import * as d from './config';
-
+import * as appConfig from './config';
 import jwt from 'jsonwebtoken';
 import path from 'path';
-// import { setTimeout } from 'timers';
 
 //Models
 import Auditurium from './models/auditoriumModel';
@@ -23,6 +20,10 @@ import AuditoriumRouter from './routers/auditoriumRouter';
 import MovieRouter from './routers/movieRouter';
 import BookRouter from './routers/bookRouter';
 import SecureRouter from './routers/secureRouter';
+
+//Services
+import SeatScheduler from './services/seatScheduler';
+import DataExtractor from './services/dataExtractorService';
 
 
 export default class App {
@@ -78,7 +79,7 @@ export default class App {
         const app = express();
 
         //JSON Web Token Secret
-        app.set('token', d.config.secret);
+        app.set('token', appConfig.config.secret);
 
          // check header or url parameters or post parameters for token
         const token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -128,9 +129,9 @@ export default class App {
         //next();
     }
 
-    initSQLAndRouters(app){
+    async initSQLAndRouters(app){
 
-        const db = d.sequelize;
+        const db = appConfig.sequelize;
         const auditoriumModel =  new Auditurium().model(db);
         const seatModel = new Seat().model(db);
         const movieModel = new Movie().model(db);
@@ -151,12 +152,20 @@ export default class App {
         //Init Routers
         const auditoriumRouter = new AuditoriumRouter(auditoriumModel, seatModel, movieModel);
         const movieRouter = new MovieRouter(auditoriumModel, movieModel, seatModel);
-        const bookRouter = new BookRouter(customerModel, purchaseModel, seatModel, secureModel);
-        const secureRouter = new SecureRouter(seatModel, secureModel);
+        const bookRouter = new BookRouter(customerModel, purchaseModel, seatModel, secureModel, auditoriumModel);
+        const secureRouter = new SecureRouter(seatModel, secureModel, auditoriumModel);
 
         //Init DB
-        if(d.config.prepare){          
-            db.sync()
+        if(appConfig.config.prepare){     
+            //Init DB
+            // await auditoriumModel.destroy({where :{id: {$gt: 0} }});
+            // await seatModel.destroy({where :{id: {$gt: 0} }});
+            // await movieModel.destroy({where :{id: {$gt: 0} }});
+            // await purchaseModel.destroy({where :{id: {$gt: 0} }});
+            // await customerModel.destroy({where :{id: {$gt: 0} }});
+            // await secureModel.destroy({where :{id: {$gt: 0} }});
+            
+            await db.sync()
         }
 
         //Set Middleware to check for tokens
@@ -165,10 +174,22 @@ export default class App {
         app.use('/wibas-eterate/ticket/api/v1/auditoria', auditoriumRouter.routes()); 
         app.use('/wibas-eterate/ticket/api/v1/purchase_ticket', bookRouter.routes()); 
         app.use('/wibas-eterate/ticket/api/v1/secure_ticket', secureRouter.routes()); 
+
+        //Start Services
+
+        //Run seat-scheduler
+        const seatCronScheduler = new SeatScheduler(appConfig.config.cron_timer, seatModel, secureModel);
+        seatCronScheduler.startScheduler();
+
+        //Run data extractor
+        console.log('path => '+path.join(__dirname));
+        const dataExtractor = new DataExtractor('/Users/selby/wibas-aterate/resources/auditoria','/Users/selby/wibas-aterate/resources/Vorstellungen.txt', auditoriumModel, movieModel, seatModel);
+        dataExtractor.initDB();
+
     }
 
     finalize(app){
-        const PORT = d.config.SERVER_PORT;
+        const PORT = appConfig.config.SERVER_PORT;
         app.listen(parseInt(PORT), ()=>{
             console.log('Running on PORT ::: '+PORT);
         });

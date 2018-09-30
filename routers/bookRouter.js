@@ -6,11 +6,12 @@ import jwt from 'jsonwebtoken';
     
 export default class BookRoutes{
 
-    constructor(CustomerModel, PurchaseModel, SeatModel, SecureModel){
+    constructor(CustomerModel, PurchaseModel, SeatModel, SecureModel, AuditoriumModel){
         this.CustomerModel = CustomerModel;
         this.SeatModel = SeatModel;
         this.PurchaseModel = PurchaseModel;
         this.SecureModel = SecureModel;
+        this.AuditoriumModel = AuditoriumModel;
     }
 
     routes(){
@@ -142,7 +143,13 @@ export default class BookRoutes{
                 break;
             }
             
-            cost += availableSeat.price;
+            let seatCost = await app.AuditoriumModel.findOne({where: {id: availableSeat.auditorium_id, status: 'A'}});
+            if(seatCost){
+                cost += seatCost.price;
+            }else{
+                flag = true;
+                break;
+            }
             
         }
 
