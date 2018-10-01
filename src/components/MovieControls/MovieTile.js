@@ -1,22 +1,17 @@
+import React from 'react';
 import MovieTitle from './MovieTitle';
 import MovieScheduler from './MovieSchedule';
+import '../../styles/movie.css';
 
 const MovieTile = (props) =>{
     return (
     <div className='movie-tile-container'>
         <MovieTitle title={props.title}></MovieTitle>
-        {renderScheduler(props.days)}
+        {props.days.map((day)=>{
+           return <MovieScheduler key={day.day} day={day.day} times={day.times} onTimeInvoked={props.onTimeInvoked}></MovieScheduler>
+        })}
     </div>
     );
-}
-
-renderScheduler = (days) => {
-    return <div> 
-    
-            {days.map((day)=>{
-                <MovieScheduler day={day.day} times={day.times}></MovieScheduler>
-            })}
-    </div>
 }
 
 export default MovieTile;

@@ -5,12 +5,12 @@
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
+    flex-direction: column;
 }
 
 .movie-container .movie-tile-container{
     padding: 0;
-    margin: 0;
-    
+    margin: 10px 0 10px 0;    
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -19,35 +19,63 @@
     
     -webkit-flex-flow: row nowrap;
     justify-content: space-around;
+    height: 100px;
+    width: 100%;
 }
 
 .movie-container .movie-tile-container .movie-title-item{
     width: 300px;
-    height: 100px;
+    text-align: left;
+    font-size: 1.4em;
+    line-height: 3.6;
+    padding: 10px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #e53935;
 }
 
 .movie-container .movie-tile-container .movie-scheduler-container{
     padding: 0;
     margin: 0;
-    
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
+    width: 180px;
+    height: 100px;
+    text-align: left;
+    flex-direction: column;
     
     -webkit-flex-flow: row nowrap;
     justify-content: space-around;
 }
 
-.movie-container .movie-tile-container .movie-scheduler-container .movie-scheduler-item{
+.movie-container .movie-tile-container .movie-scheduler-container .title{
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #ef5350;
+}
+
+.movie-container .movie-tile-container .movie-scheduler-container .movie-scheduler-items{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.movie-container .movie-tile-container .movie-scheduler-container .movie-scheduler-items .movie-scheduler-sigle-item{
+    background: #f44336;
+    margin: 1px;
+    color: #fefefe;
     padding: 5px;
-    width: 30px;
-    height: 30px;
-    margin-top: 8px;
-    
-    color: white;
-    font-weight: bold;
-    font-size: 1.2em;
-    text-align: left;
+    cursor: pointer;
+}
+
+.movie-container .movie-tile-container .movie-scheduler-container .movie-scheduler-items .movie-scheduler-sigle-item:hover{
+    background: #fefefe;
+    margin: 1px;
+    color: #f44336;
+    padding: 5px;
+    cursor: pointer;
 }

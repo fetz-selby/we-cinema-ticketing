@@ -1,0 +1,215 @@
+.auditorium-container{
+    padding: 0;
+    margin: 10px 0 10px 0;    
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.auditorium-container .movie-summary-container{
+    display: flex;
+    -webkit-flex-flow: column wrap;
+    flex-direction: column;
+    padding: 10px 20px;
+}
+
+.auditorium-container .movie-summary-container .item{
+    width: 200px;
+    height: 80px;
+    padding: 10px;
+    border: 2px solid #f44336;
+    text-align: center;
+    color: #555555;
+}
+
+.auditorium-container .movie-summary-container .item .movie-caption{
+    text-align: right;
+    padding-bottom: 10px;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+}
+
+.auditorium-container .movie-summary-container .item .time-caption{
+    text-align: right;
+    font-size: 1.8em;
+    letter-spacing: 2px;
+}
+
+.auditorium-container .header-containter{
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-direction: row;
+    padding: 10px 20px;
+}
+
+.auditorium-container .seat-container {
+    padding: 0;
+    margin: 10px 0 10px 0;    
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    list-style: none;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
+.auditorium-container .seat-container .selected-seat-item {
+    background: #f44336;
+    border: 1px solid #ffffff;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    margin-top: 8px;
+    
+    line-height: 2;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.auditorium-container .seat-container .unselected-seat-item {
+    background: #ffffff;
+    border:1px solid #888888;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    margin-top: 8px;
+    
+    line-height: 2;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.auditorium-container .seat-container .booked-seat-item {
+    background: #e2e2e2;
+    border: 1px solid #ffffff;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    margin-top: 8px;
+    
+    line-height: 2;
+    color: #555555;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.auditorium-container .seat-container .margin-seat-item {
+    background: #ffffff;
+    border: 1px solid #f44336;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    margin-top: 8px;
+    
+    line-height: 2;
+    color: #f44336;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.auditorium-container .seat-container .empty-seat-item {
+    background: none;
+    border: 1px solid #ffffff;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    margin-top: 8px;
+    
+    line-height: 2;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.auditorium-container .total-seat-price {
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    background: #ffffff;
+    padding: 20px;
+    height: 40px;
+    margin-top: 8px;
+    list-style: none;
+    
+    line-height: 2;
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: left;
+}
+
+.auditorium-container .total-seat-price .total-price-text{
+    -webkit-flex-flow: row wrap;
+    background: #d32f2f;
+    padding: 5px 10px;
+    height: 40px;
+    margin-top: 8px;
+    list-style: none;
+    line-height: 1.7;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.auditorium-container .total-seat-price .total-price-value{
+    -webkit-flex-flow: row wrap;
+    background: none;
+    padding: 5px 20px;
+    height: 40px;
+    margin-top: 8px;
+    list-style: none;
+    
+    line-height: 2;
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.auditorium-container .total-seat-price .total-price-currency{
+    -webkit-flex-flow: row wrap;
+    background: none;
+    padding: 5px 20px;
+    height: 40px;
+    margin-top: 8px;
+    list-style: none;
+    
+    line-height: 2;
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.auditorium-container .footer-container{
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-direction: row-reverse;
+    padding: 10px 20px;
+}
+
+.auditorium-container .footer-container .payment-action-btn{
+    padding: 15px 30px;
+    color: #d32f2f;
+    background: #ffffff;
+    border: 1px solid #d32f2f;
+    cursor: pointer;
+    font-size: 1.1em;
+}

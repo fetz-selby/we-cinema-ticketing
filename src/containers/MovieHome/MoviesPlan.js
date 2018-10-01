@@ -4,21 +4,23 @@ import * as actionCreators from '../../store/actions/actions';
 import MovieTile from '../../components/MovieControls/MovieTile';
 import '../../styles/movie.css';
 
-
-
 class MoviesPlan extends Component{
 
+    componentWillMount(){
+        this.props.loadMovies();
+    }
     
     renderMovies = (movies) => {
         return movies.map((movie)=>{
-            return <MovieTile title={movie.title} days={}></MovieTile>
+            return <MovieTile key={movie.movie_id} title={movie.movie_name} days={movie.days}></MovieTile>
         })
+        
     }
 
     render(){
         return(
         <div className='movie-container'>
-            
+            {this.renderMovies(this.props.allMovies)}
         </div>
         );
     }
@@ -27,13 +29,13 @@ class MoviesPlan extends Component{
 
 const mapStateToProps = state =>{
     return {
-        allMovies : state.movies
+        allMovies : state.movie.movies
     }
 }
 
 const mapDispatchToProps = dispatch =>{
     return {
-        onTimeInvoked : (auditoriumId) => dispatch(actionCreators.showAuditorium(auditoriumId))
+        loadMovies : () => dispatch(actionCreators.loadMovies()),
     }
 }
 

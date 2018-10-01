@@ -52,6 +52,7 @@ export default class AuditoriumRoutes{
             let result = [];
             auditoria.map(async (auditorium, i)=>{
                 const auditorium_id = auditorium.id;
+                const auditorium_name = auditorium.auditorium_name;
                 const movie_id = auditorium.movie_id;
                 const day = auditorium.day;
                 const time = auditorium.time;
@@ -65,6 +66,7 @@ export default class AuditoriumRoutes{
                 if(seats){
                     result.push( {
                         auditorium_id,
+                        auditorium_name,
                         movie_id,
                         movie_name,
                         day,
@@ -101,6 +103,7 @@ export default class AuditoriumRoutes{
         if(auditorium){
             let result = [];
             const auditorium_id = auditorium.id;
+            const auditorium_name = auditorium.auditorium_name;
             const movie_id = auditorium.movie_id;
             const day = auditorium.day;
             const time = auditorium.time;
@@ -114,6 +117,7 @@ export default class AuditoriumRoutes{
             if(seats){
                 result.push( {
                     auditorium_id,
+                    auditorium_name,
                     movie_id,
                     movie_name,
                     day,
