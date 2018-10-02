@@ -1,5 +1,5 @@
 .auditorium-container{
-    padding: 0;
+    padding: 50px 100px;
     margin: 10px 0 10px 0;    
     display: -webkit-box;
     display: -moz-box;
@@ -7,7 +7,7 @@
     display: -webkit-flex;
     display: flex;
     flex-direction: column;
-    -webkit-flex-flow: row wrap;
+    -webkit-flex-flow: column wrap;
     justify-content: space-around;
 }
 
@@ -20,7 +20,7 @@
 
 .auditorium-container .movie-summary-container .item{
     width: 200px;
-    height: 80px;
+    height: 120px;
     padding: 10px;
     border: 2px solid #f44336;
     text-align: center;
@@ -37,6 +37,13 @@
 .auditorium-container .movie-summary-container .item .time-caption{
     text-align: right;
     font-size: 1.8em;
+    letter-spacing: 2px;
+    padding-top: 40px;
+}
+
+.auditorium-container .movie-summary-container .item .rate{
+    text-align: right;
+    font-size: 1.1em;
     letter-spacing: 2px;
 }
 

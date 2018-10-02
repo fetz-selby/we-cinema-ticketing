@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../store/actions/actions';
 import MovieTile from '../../components/MovieControls/MovieTile';
+import MovieHeader from '../../components/MovieControls/MovieHeader';
 import '../../styles/movie.css';
 
 class MoviesPlan extends Component{
@@ -20,6 +21,7 @@ class MoviesPlan extends Component{
     render(){
         return(
         <div className='movie-container'>
+            <MovieHeader caption='Online Cinema Ticket' pref='wibas eterate'></MovieHeader>
             {this.renderMovies(this.props.allMovies)}
         </div>
         );

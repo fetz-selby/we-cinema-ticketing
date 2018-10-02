@@ -6,6 +6,8 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import registerServiceWorker from './registerServiceWorker';
 import movieReducer from './store/reducers/movieReducer';
 import auditoriumReducer from './store/reducers/auditoriumReducer';
+import paymentReducer from './store/reducers/paymentReducer';
+
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 
@@ -20,7 +22,8 @@ const logger = store => {
 
 const rootReducer = combineReducers({
     movie : movieReducer,
-    auditorium : auditoriumReducer
+    auditorium : auditoriumReducer,
+    payment : paymentReducer
 })
 
 

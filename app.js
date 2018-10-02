@@ -158,12 +158,12 @@ export default class App {
         //Init DB
         if(appConfig.config.prepare){     
             //Init DB
-            // await auditoriumModel.destroy({where :{id: {$gt: 0} }});
-            // await seatModel.destroy({where :{id: {$gt: 0} }});
-            // await movieModel.destroy({where :{id: {$gt: 0} }});
-            // await purchaseModel.destroy({where :{id: {$gt: 0} }});
-            // await customerModel.destroy({where :{id: {$gt: 0} }});
-            // await secureModel.destroy({where :{id: {$gt: 0} }});
+            // await auditoriumModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
+            // await seatModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
+            // await movieModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
+            // await purchaseModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
+            // await customerModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
+            // await secureModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
             
             await db.sync()
         }

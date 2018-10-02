@@ -12,7 +12,8 @@ const initialState = {
     time: '',
     seats: [],
     selectedSeats: [],
-    totalPrice: 0.0
+    totalPrice: 0.0,
+    reservedCode: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -31,6 +32,7 @@ const reducer = (state = initialState, action) => {
             const price = auditorium.price;
             const selectedSeats = [];
             const totalPrice = 0.00;
+            const reservedCode = '';
 
             //Redirect
             window.location.href = '#/belegungsplan'
@@ -47,7 +49,8 @@ const reducer = (state = initialState, action) => {
                 movie,
                 price,
                 totalPrice,
-                selectedSeats
+                selectedSeats,
+                reservedCode
             }
         }
 
@@ -73,6 +76,17 @@ const reducer = (state = initialState, action) => {
                 totalPrice
             };
         }
+
+        case actionTypes.SEAT_RESERVED:{
+            const reservedCode = action.data.code;
+
+            return {
+                ...state,
+                reservedCode
+            }
+
+
+        }
          
         case actionTypes.SEAT_UNBOOKED: {
             const seat = _.find(state.seats, {id: action.data});
@@ -82,6 +96,7 @@ const reducer = (state = initialState, action) => {
                 if(id !== seat.id){
                     return true;
                 }
+                return false;
             })
             const totalPrice = state.price * selectSeats.length;
 

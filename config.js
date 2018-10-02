@@ -5,8 +5,8 @@ const config = {
     IP : process.env.SERVER_IP,
     SERVER_PORT : process.env.LOCAL_PORT || 8001,
     secret : 'thequickfoxjumpedofthelazydog',
-    cron_timer: 30,
-    seat_secure_timer: 30,
+    cron_timer: 5,
+    seat_secure_timer: 5,
     prepare : true
 }
 

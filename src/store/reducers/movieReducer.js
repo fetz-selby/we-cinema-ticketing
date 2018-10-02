@@ -1,5 +1,4 @@
 import * as actionTypes from '../actions/actions';
-import _ from 'lodash';
 
 const initialState = {
     movies: []
