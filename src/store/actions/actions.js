@@ -56,14 +56,52 @@ export const showPayment = (selectedSeats, movie, totalPrice, reservedCode) =>{
 
 export const makePayment = (securedCode, seat, name, card, code, month, year) =>{
     return dispatch => {
+        // axios({
+        //     method:'post',
+        //     url:'http://localhost:8001/wibas-eterate/ticket/api/v1/purchase_ticket',
+        //     responseType:'blob',
+        //     data : {fullname:name,card,code,expire_month:month,expire_year:year,seat,gen_code:securedCode},
+        //     headers: {'Content-Type': 'application/pdf'}
+        //     })
+        //     .then((res)=>{
+        //         if(res.data !== null){
+        //             dispatch({
+        //                 type : PAYMENT_SUCCESS,
+        //                 data: res.data
+        //             });
+        //         }else{
+        //             dispatch({
+        //                 type : PAYMENT_FAILED,
+        //                 data: null
+        //             });
+        //         }     
+        //     }).catch(()=>{
+        //         dispatch({
+        //             type : PAYMENT_ERROR,
+        //             data: null
+        //         });
+        //     })
 
-        axios.post('http://localhost:8001/wibas-eterate/ticket/api/v1/purchase_ticket', {fullname:name,card,code,expire_month:month,expire_year:year,seat,gen_code:securedCode})
+        axios.post('http://localhost:8001/wibas-eterate/ticket/api/v1/purchase_ticket', 
+        {fullname:name,
+            card,
+            code,
+            expire_month:month,
+            expire_year:year,
+            seat,
+            gen_code:securedCode
+        }, {
+            // responseType: 'arraybuffer',
+            responseType: 'blob',
+            headers: {
+              'Accept': 'application/pdf'
+            }})
         .then((res)=>{
 
-            if(res.data !== undefined && res.data.success){
+            if(res.data !== undefined){
                 dispatch({
-                    type : PAYMENT_SUCCESS
-                    
+                    type : PAYMENT_SUCCESS,
+                    data: res.data
                 });
             }else{
                 dispatch({

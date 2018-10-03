@@ -1,17 +1,20 @@
 import express from 'express';
 import * as utils from '../resources/utils';
 import * as appConfig from '../config';
-import jwt from 'jsonwebtoken';
+import dateformat from 'dateformat';
+import pdf from 'html-pdf';
+// import jwt from 'jsonwebtoken';
 
     
 export default class BookRoutes{
 
-    constructor(CustomerModel, PurchaseModel, SeatModel, SecureModel, AuditoriumModel){
+    constructor(CustomerModel, PurchaseModel, SeatModel, SecureModel, AuditoriumModel, MovieModel){
         this.CustomerModel = CustomerModel;
         this.SeatModel = SeatModel;
         this.PurchaseModel = PurchaseModel;
         this.SecureModel = SecureModel;
         this.AuditoriumModel = AuditoriumModel;
+        this.MovieModel = MovieModel;
     }
 
     routes(){
@@ -35,6 +38,7 @@ export default class BookRoutes{
 
         bookRouter.route('/')
             .post((req, res)=>{
+
                 const fullname = req.body.fullname;
                 const card = req.body.card;
                 const code = req.body.code;
@@ -54,7 +58,7 @@ export default class BookRoutes{
                     return;
                 }
 
-                if(!(card && card.trim().length > 13 && utils.isNumbers(card))){
+                if(!(card && card.trim().length > 15 && utils.isNumbers(card))){
                     res.status(400)
                     .json({
                         success: false,
@@ -164,7 +168,7 @@ export default class BookRoutes{
         }
 
         //Save details and seat
-        const fullname = req.body.fullname;
+        const fullname = req.body.fullname.toUpperCase();
         const card_number = req.body.card;
         const code = req.body.code;
         const expire_month = req.body.expire_month;
@@ -175,6 +179,7 @@ export default class BookRoutes{
         //Attach customer_id to seat and update seat
 
         //use transaction to persist
+        const seatInfo = [];
         await appConfig.sequelize.transaction( async t=>{
             let customer = await app.CustomerModel.create({fullname,card_number, expire_month, expire_year, code, cost}, {transaction: t});
 
@@ -183,11 +188,24 @@ export default class BookRoutes{
                 if(reserved){
 
                     let update = await app.SeatModel.update({status : 'B'}, {where : {id: seat_id, status: 'P'}, transaction: t});
-                     
                     if(update > 0){
                         await app.PurchaseModel.create({customer_transaction_id: customer.id, 
                             seat_id}, {transaction: t});
                         await app.SecureModel.update({status: 'D'}, {where: {seat_id}, transaction: t});
+                        
+                        let seat = await app.SeatModel.findOne({where: {id: seat_id}, transaction: t}); 
+                        let auditorium = await app.AuditoriumModel.findOne({where : {id: seat.auditorium_id, status: 'A'}, transaction: t});
+                        let movie = await app.MovieModel.findOne({where : {id: auditorium.movie_id, status: 'A'}, transaction: t})
+
+
+
+                        seatInfo.push({movie: movie.name, 
+                                        auditorium: auditorium.auditorium_name, 
+                                        row: seat.row, 
+                                        column: seat.column,
+                                        price: auditorium.price,
+                                        time: auditorium.time
+                                        });
                     }else{
                         throw 'seat is booked';
                     }
@@ -196,11 +214,53 @@ export default class BookRoutes{
                 }
             }
 
-            res.status(200)
-            .json({
-                success: true,
-                message: 'seat(s) booked successfully'
+            //Generate and send PDF
+            const dySeats = utils.getHTMLSeats(seatInfo);
+
+            const maskedCard = card_number.substring(13);
+            const expiryDate = expire_month+'/'+expire_year;
+            const desc = seatInfo[0].movie.toUpperCase()+', '+seatInfo[0].price+' EUR, '+seatInfo[0].auditorium;
+            const price = seatInfo[0].price;
+            const numberSeats = seats.length;
+            const totalPrice = cost;
+            const transactionId = customer.id;
+            const date = dateformat(new Date(), 'dd/mm/yyyy');
+            const movie = seatInfo[0].movie;
+            const time = seatInfo[0].time;
+            const auditorium = seatInfo[0].auditorium;
+
+
+
+            const html = utils.getHTMLPaymentReciept(fullname,
+                                        maskedCard,
+                                        expiryDate,
+                                        desc,
+                                        price,
+                                        numberSeats,
+                                        totalPrice,
+                                        gen_code,
+                                        transactionId,
+                                        date,
+                                        movie,
+                                        time,
+                                        auditorium,
+                                        dySeats
+                                        )
+
+
+
+            pdf.create(html).toFile(function(err, f){
+                if(f.filename){
+                    res.status(200).sendFile(f.filename);  
+                }else{
+                    res.status(200).sendFile(f);  
+                }                              
             })
+            // res.status(200)
+            // .json({
+            //     success: true,
+            //     message: 'seat(s) booked successfully'
+            // })
             
         }).catch((err)=>{
             res.status(400)

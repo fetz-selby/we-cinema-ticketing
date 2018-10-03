@@ -9,7 +9,8 @@ const initialState = {
     code: '',
     month: '',
     year: '',
-    reservedCode: ''
+    reservedCode: '',
+    pdf: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -35,8 +36,11 @@ const reducer = (state = initialState, action) => {
 
         case actionTypes.PAYMENT_SUCCESS:{
             console.log('Payment GINX');
+            const pdf = new Blob([action.data], {type:"application/pdf"});
+            window.location.href = '#/quittung'
             return {
-                ...state
+                ...state,
+                pdf
             }
         }
 

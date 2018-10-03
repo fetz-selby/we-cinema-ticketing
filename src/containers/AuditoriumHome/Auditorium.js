@@ -10,6 +10,7 @@ import PaidSeat from '../../components/AuditoriumControls/PaidSeat';
 import CounterMargin from '../../components/AuditoriumControls/CounterMargin';
 import MovieSummary from '../../components/AuditoriumControls/MovieSummary';
 import TotalSeatPrice from '../../components/AuditoriumControls/TotalSeatPrice';
+import AuditoriumTitle from '../../components/AuditoriumControls/AuditoriumTitle';
 
 class Auditorium extends Component{
     
@@ -20,6 +21,7 @@ class Auditorium extends Component{
         }
         //Create a metrix
         const matrix = [];
+        let key = 0;
         for(let i=1; i<=this.props.ySize; i++){
             let elements = [];
 
@@ -27,24 +29,25 @@ class Auditorium extends Component{
             elements.push(<CounterMargin key={i} count={i}></CounterMargin>)
             for(let j=1; j<=this.props.xSize; j++){
 
+                key ++;
                 //Check in seats if exist
                 const seat = _.find(this.props.seats, {row : i, column: j});
                 if(seat && seat.status === 'A'){
                     //Render Available
-                    elements.push(<AvailableSeat key={seat.id} seatId={seat.id}></AvailableSeat>);
+                    elements.push(<AvailableSeat key={key} seatId={seat.id}></AvailableSeat>);
                 }else if(seat && (seat.status === 'B' || seat.status === 'P')){
                     //Render Booked
-                    elements.push(<PaidSeat key={seat.id} seatId={seat.id}></PaidSeat>);
+                    elements.push(<PaidSeat key={key} seatId={seat.id}></PaidSeat>);
                 }else if(seat && (seat.status === 'T')){
                     //Render Booked
-                    elements.push(<BookedSeat key={seat.id} seatId={seat.id}></BookedSeat>);
+                    elements.push(<BookedSeat key={key} seatId={seat.id}></BookedSeat>);
                 }else{
                     //Render Blank
-                    elements.push(<BlankSeat key={i+''+j} seatId={(i*j)}></BlankSeat>);
+                    elements.push(<BlankSeat key={key} seatId={(i*j)}></BlankSeat>);
                 }
             }
 
-            matrix.push(<ul className='seat-container'>{elements}</ul>);
+            matrix.push(<ul key={i} className='seat-container'>{elements}</ul>);
         }
 
         return matrix;
@@ -70,7 +73,10 @@ class Auditorium extends Component{
     render(){
         return(
         <div className='auditorium-container'>
-            <MovieSummary movie={this.props.movie} time={this.props.time} price={this.props.price}></MovieSummary>
+            <div className='auditorium-header-container'>
+                <MovieSummary movie={this.props.movie} time={this.props.time} price={this.props.price}></MovieSummary>
+                <AuditoriumTitle title={this.props.auditoriumName}></AuditoriumTitle>
+            </div>
             {this.renderSeats()}
             <TotalSeatPrice price={this.props.totalPrice}></TotalSeatPrice>
             <div className='footer-container'>

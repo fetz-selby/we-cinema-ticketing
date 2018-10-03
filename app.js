@@ -152,7 +152,7 @@ export default class App {
         //Init Routers
         const auditoriumRouter = new AuditoriumRouter(auditoriumModel, seatModel, movieModel);
         const movieRouter = new MovieRouter(auditoriumModel, movieModel, seatModel);
-        const bookRouter = new BookRouter(customerModel, purchaseModel, seatModel, secureModel, auditoriumModel);
+        const bookRouter = new BookRouter(customerModel, purchaseModel, seatModel, secureModel, auditoriumModel, movieModel);
         const secureRouter = new SecureRouter(seatModel, secureModel, auditoriumModel);
 
         //Init DB

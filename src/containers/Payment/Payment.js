@@ -68,43 +68,52 @@ class Payment extends Component{
     }
 
     nameChangeHandler = (evt) =>{
+        this.validate();
+
         this.setState({
             name: evt.target.value
         })
 
-        this.validate();
     }
 
     cardChangeHandler = (evt) =>{
+        this.validate();
+
         this.setState({
             cardNumber: evt.target.value
         })
 
-        this.validate();
+        // this.validate();
     }
 
     codeChangeHandler = (evt) =>{
+        this.validate();
+
         this.setState({
             code: evt.target.value
         })
 
-        this.validate();
+        // this.validate();
     }
 
     onMonthChangeHandler = (evt) =>{
+        this.validate();
+
         this.setState({
             month: evt.target.value
         })
 
-        this.validate();
+        // this.validate();
     }
 
     onYearChangeHandler = (evt) =>{
+        this.validate();
+
         this.setState({
             year: evt.target.value
         })
 
-        this.validate();
+        // this.validate();
     }
 
     validate = () =>{
@@ -124,7 +133,7 @@ class Payment extends Component{
         }
 
         //Check card number
-        if(this.getNumber(this.state.cardNumber, ' ').length < 16){
+        if(this.getNumber(this.state.cardNumber, ' ').length < 15){
             this.setState({
                 showCardError: true
             })
@@ -137,7 +146,7 @@ class Payment extends Component{
         }
 
         //Check code
-        if(this.state.code.trim().length < 3){
+        if(this.state.code.trim().length < 2){
             this.setState({
                 showCodeError: true
             })
@@ -241,7 +250,7 @@ const mapStateToProps = state =>{
         movie: state.payment.movie,
         numberOfSeats: (state.payment.selectedSeats).length,
         reservedCode: state.payment.reservedCode,
-        selectedSeats: state.payment.selectedSeats
+        selectedSeats: state.payment.selectedSeats,
     }
 }
 
