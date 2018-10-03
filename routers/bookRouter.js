@@ -256,12 +256,6 @@ export default class BookRoutes{
                     res.status(200).sendFile(f);  
                 }                              
             })
-            // res.status(200)
-            // .json({
-            //     success: true,
-            //     message: 'seat(s) booked successfully'
-            // })
-            
         }).catch((err)=>{
             res.status(400)
             .json({

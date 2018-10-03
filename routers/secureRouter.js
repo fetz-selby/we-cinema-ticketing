@@ -81,7 +81,6 @@ export default class SecureRoutes{
 
             return;
         }
-        console.log('Got here');
 
         //Start a transaction to secure the seats
         //Change seat status to 'P'

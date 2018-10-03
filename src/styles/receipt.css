@@ -6,7 +6,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 160px 100px;
+    padding: 65px 100px;
+}
+
+.receipt-container .doc{
+    margin: 0 auto;
 }
 
 .receipt-container .action-container{

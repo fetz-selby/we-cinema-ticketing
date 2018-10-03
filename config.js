@@ -7,7 +7,7 @@ const config = {
     secret : 'thequickfoxjumpedofthelazydog',
     cron_timer: 5,
     seat_secure_timer: 5,
-    prepare : true
+    prepare : false
 }
 
 const sequelize = new Sequelize(process.env.DB_NAME || 'TICKET_TEST', process.env.DB_USER || 'ticket_admin', process.env.DB_PASSWORD || 'pa55w0rd', {

@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import * as actionCreators from '../../store/actions/actions';
 import {Document, Page} from 'react-pdf';
 import downloadFile from 'react-file-download';
-
-
 
 import '../../styles/receipt.css';
 
 class Receipt extends Component{
 
     componentWillMount(){
-        // this.props.loadMovies();
         if(this.props.pdf === null){
             window.location.href = '#/'
         }
@@ -20,14 +16,14 @@ class Receipt extends Component{
     showPDF = () =>{
         if(this.props.pdf){
             const pageNumber = 1;
-            return <Document file={this.props.pdf}>
+            return <Document file={this.props.pdf} className='doc'>
                 <Page pageNumber={pageNumber} />
             </Document>
         }
     }
 
     onDownloadHandler = () =>{
-        downloadFile(this.props.pdf, 'receipt.pdf');
+        downloadFile(this.props.pdf, 'quittung.pdf');
     }
 
     onHomeHandler = () =>{

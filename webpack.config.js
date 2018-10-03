@@ -32,8 +32,8 @@ module.exports = {
         //         comments: false,
         //     },
         // }),
-        //  new CopyWebpackPlugin([{from : './resources/banks.json', to:'./resources/banks.json'}, 
-        //                         {from : './resources/ic_banks.json', to:'./resources/ic_banks.json'},
-        //                         {from : './static/stocks/companies/*', to : './'}])
+         new CopyWebpackPlugin([{from : './resources/auditoria', to:'./resources/auditoria'}, 
+                                {from : './resources/Vorstellungen.txt', to:'./resources/Vorstellungen.txt'},
+                                ])
     ]
 };

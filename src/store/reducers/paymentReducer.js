@@ -35,7 +35,6 @@ const reducer = (state = initialState, action) => {
         }
 
         case actionTypes.PAYMENT_SUCCESS:{
-            console.log('Payment GINX');
             const pdf = new Blob([action.data], {type:"application/pdf"});
             window.location.href = '#/quittung'
             return {

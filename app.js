@@ -155,21 +155,18 @@ export default class App {
         const bookRouter = new BookRouter(customerModel, purchaseModel, seatModel, secureModel, auditoriumModel, movieModel);
         const secureRouter = new SecureRouter(seatModel, secureModel, auditoriumModel);
 
-        //Init DB
+        await db.sync()
+
         if(appConfig.config.prepare){     
             //Init DB
-            // await auditoriumModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
-            // await seatModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
-            // await movieModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
-            // await purchaseModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
-            // await customerModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
-            // await secureModel.update({status: 'D'}, {where :{id: {$gt: 0} }});
-            
-            await db.sync()
+            const vorstellungen = path.resolve('./resources/Vorstellungen.txt');
+            const auditoria = path.resolve('./resources/auditoria');
+
+            //Run data extractor
+            const dataExtractor = new DataExtractor(auditoria, vorstellungen, auditoriumModel, movieModel, seatModel);
+            dataExtractor.initDB();
         }
 
-        //Set Middleware to check for tokens
-        //app.use('/wibas-eterate/api/v1/*', this.validate); 
         app.use('/wibas-eterate/ticket/api/v1/movies', movieRouter.routes()); 
         app.use('/wibas-eterate/ticket/api/v1/auditoria', auditoriumRouter.routes()); 
         app.use('/wibas-eterate/ticket/api/v1/purchase_ticket', bookRouter.routes()); 
@@ -180,12 +177,6 @@ export default class App {
         //Run seat-scheduler
         const seatCronScheduler = new SeatScheduler(appConfig.config.cron_timer, seatModel, secureModel);
         seatCronScheduler.startScheduler();
-
-        //Run data extractor
-        console.log('path => '+path.join(__dirname));
-        const dataExtractor = new DataExtractor('/Users/selby/wibas-aterate/resources/auditoria','/Users/selby/wibas-aterate/resources/Vorstellungen.txt', auditoriumModel, movieModel, seatModel);
-        dataExtractor.initDB();
-
     }
 
     finalize(app){

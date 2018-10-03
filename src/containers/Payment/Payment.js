@@ -83,7 +83,6 @@ class Payment extends Component{
             cardNumber: evt.target.value
         })
 
-        // this.validate();
     }
 
     codeChangeHandler = (evt) =>{
@@ -93,7 +92,6 @@ class Payment extends Component{
             code: evt.target.value
         })
 
-        // this.validate();
     }
 
     onMonthChangeHandler = (evt) =>{
@@ -103,7 +101,6 @@ class Payment extends Component{
             month: evt.target.value
         })
 
-        // this.validate();
     }
 
     onYearChangeHandler = (evt) =>{
@@ -113,7 +110,6 @@ class Payment extends Component{
             year: evt.target.value
         })
 
-        // this.validate();
     }
 
     validate = () =>{

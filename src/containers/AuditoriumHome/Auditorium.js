@@ -24,7 +24,7 @@ class Auditorium extends Component{
         let key = 0;
         for(let i=1; i<=this.props.ySize; i++){
             let elements = [];
-
+            key++;
             //Add counter margin
             elements.push(<CounterMargin key={i} count={i}></CounterMargin>)
             for(let j=1; j<=this.props.xSize; j++){
