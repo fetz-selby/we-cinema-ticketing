@@ -271,33 +271,33 @@ export function getHTMLPaymentReciept(name,
 
 <body>   
     <div class='container'>
-        <div class='title'>Order xGyL45</div>
+        <div class='title'>Auftrag xGyL45</div>
         <div class='clearfix'></div>
         <div class='company'>Online Cinema Ticket - wibas eterate</div>
         <div class='spacer'></div>
-        <div class='date'>Date: ${date}</div>
+        <div class='date'>Datum: ${date}</div>
         <div class='clearfix'></div>
         <hr />
         <div class='details-container'>
-            <div class='info'>Name</div>
+            <div class='info'>Karteninhaber</div>
             <div class='clearfix'></div>
             <div class='info-highlite'>${name}</div>
             <div class='clearfix'></div>
-            <div class='info'>Card</div>
+            <div class='info'>Kartennummer</div>
             <div class='clearfix'></div>
             <div class='info-highlite'>**** **** **** *${card}</div>
             <div class='clearfix'></div>
-            <div class='info'>Expiry Date</div>
+            <div class='info'>Gultig bis</div>
             <div class='clearfix'></div>
             <div class='info-highlite'>${expiryDate}</div>
         </div>
         
         <div class='details-container2'>
-            <div class='info'>Invoice #</div>
+            <div class='info'>Rechnung #</div>
             <div class='clearfix'></div>
             <div class='info-highlite'>${transactionId}</div>
             <div class='clearfix'></div>
-            <div class='info'>Order ID</div>
+            <div class='info'>Auftragsnummer</div>
             <div class='clearfix'></div>
             <div class='info-highlite'>${genCode}</div>
             <div class='clearfix'></div>
@@ -309,25 +309,25 @@ export function getHTMLPaymentReciept(name,
         <div class='spacer'></div>
 
         <div class='details-container'>
-            <div class='info'>Movie</div>
+            <div class='info'>Film</div>
             <div class='clearfix'></div>
             <div class='info-highlite'>${movie}</div>
             <div class='clearfix'></div>
-            <div class='info'>Time</div>
+            <div class='info'>Zeit</div>
             <div class='clearfix'></div>
             <div class='info-highlite'>${time}</div>
             <div class='clearfix'></div>
-            <div class='info'>Auditorium</div>
+            <div class='info'>Halle</div>
             <div class='clearfix'></div>
             <div class='info-highlite'>${auditorium}</div>
         </div>
         
         <div class='spacer'></div>
-        <div class='seat-label'>Purchased Seat(s)</div>
+        <div class='seat-label'>gekaufte Sitze</div>
         <div class='clearfix'></div>
         <div class='header-row' style='background:none; padding-left:0'>
-            <div class='qty-header'>ROW</div>
-            <div class='unit-header'>COLUMN</div>
+            <div class='qty-header'>Reihe</div>
+            <div class='unit-header'>Säule</div>
         </div>
         <div class='clearfix'></div>
         ${dySeats}
@@ -335,9 +335,9 @@ export function getHTMLPaymentReciept(name,
         <div class='spacer'></div>
         <div class='header-row'>
             <div class='qty-header'>QTY</div>
-            <div class='unit-header'>UNIT</div>
-            <div class='desc-header'>DESCRIPTION</div>
-            <div class='sub-header'>SUBTOTAL</div>
+            <div class='unit-header'>Einheit</div>
+            <div class='desc-header'>Beschreibung</div>
+            <div class='sub-header'>Zwischensumme</div>
         </div>
         <div class='clearfix'></div>
         <div class='row'>
@@ -349,13 +349,13 @@ export function getHTMLPaymentReciept(name,
         <div class='spacer'></div>
         
         <div class='summary'>
-            <div class='label'>SUBTOTAL</div>
+            <div class='label'>Zwischensumme</div>
             <div class='value'>${totalPrice} EUR</div>
             <div class='clearfix'></div>
-            <div class='label'>TAX(0%)</div>
+            <div class='label'>MwSt(0%)</div>
             <div class='value'>0 EUR</div>
             <div class='spacer'></div>
-            <div class='label'>TOTAL</div>
+            <div class='label'>gesamt</div>
             <div class='value'>${totalPrice} EUR</div>
         </div>
     </div>

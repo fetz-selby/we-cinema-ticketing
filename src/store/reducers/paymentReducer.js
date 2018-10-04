@@ -9,7 +9,7 @@ const initialState = {
     code: '',
     month: '',
     year: '',
-    reservedCode: '',
+    reservedCode: null,
     pdf: null
 }
 
@@ -22,8 +22,7 @@ const reducer = (state = initialState, action) => {
             const movie = action.data.movie;
             const reservedCode = action.data.reservedCode;
 
-            //Redirect
-            window.location.href = '#/zahlung'
+            // window.location.href = '#/zahlung';
 
             return {
                 ...state,
@@ -41,6 +40,27 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 pdf
             }
+        }
+
+        case actionTypes.SEAT_RESERVED:{
+            const reservedCode = action.data.code;
+            const movie = action.data.movie;
+            const totalPrice = action.data.totalPrice;
+            const selectedSeats = action.data.selectedSeats;
+
+            console.log('code => '+reservedCode);
+            
+            window.location.href = '#/zahlung';
+
+            return {
+                ...state,
+                reservedCode,
+                movie,
+                totalPrice,
+                selectedSeats
+            }
+
+
         }
 
         default: 

@@ -22,22 +22,6 @@ export default class AuditoriumRoutes{
                 app.auditoriumRequest(res, req.params.id);
             }); 
 
-        auditoriumRouter.route('/movie/:id')
-            .get((req, res)=>{
-              
-            });
-
-        auditoriumRouter.route('/')
-            .post((req, res)=>{
-                
-            }); 
-            
-
-        auditoriumRouter.route('/:id')
-            .delete((req, res)=>{
-                
-            });
-
         return auditoriumRouter;
     }
 

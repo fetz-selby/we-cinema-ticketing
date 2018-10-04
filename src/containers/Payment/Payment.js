@@ -24,7 +24,7 @@ class Payment extends Component{
 
     componentWillMount(){
         if(this.props.totalPrice === 0){
-            window.location.href = '/';
+           window.location.href = '#/';
         }
     }
 

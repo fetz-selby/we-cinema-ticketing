@@ -83,7 +83,8 @@
   }
 
 .auditorium-container .seat-container .selected-seat-item {
-    background: #f44336;
+    background-image: url('./icons/tick.png');
+    background-size: cover;
     border: 1px solid #ffffff;
     padding: 5px;
     width: 40px;

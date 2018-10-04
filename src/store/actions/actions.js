@@ -91,7 +91,7 @@ export const makePayment = (securedCode, seat, name, card, code, month, year) =>
     }
 }
 
-export const reserveSeat = (selectedSeats) => {
+export const reserveSeat = (selectedSeats, movie, totalPrice) => {
     return dispatch => {
         const seats = selectedSeats;
         axios.post('http://localhost:8001/wibas-eterate/ticket/api/v1/secure_ticket', {seats})
@@ -100,7 +100,7 @@ export const reserveSeat = (selectedSeats) => {
             if(res.data !== undefined && res.data.success){
                 dispatch({
                     type : SEAT_RESERVED,
-                    data: res.data.result
+                    data: {code: res.data.result.code, movie, totalPrice, selectedSeats}
                 });
             }else{
                 dispatch({

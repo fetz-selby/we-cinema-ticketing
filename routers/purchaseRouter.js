@@ -6,7 +6,7 @@ import pdf from 'html-pdf';
 // import jwt from 'jsonwebtoken';
 
     
-export default class BookRoutes{
+export default class PurchaseRoutes{
 
     constructor(CustomerModel, PurchaseModel, SeatModel, SecureModel, AuditoriumModel, MovieModel){
         this.CustomerModel = CustomerModel;
@@ -19,24 +19,9 @@ export default class BookRoutes{
 
     routes(){
         const app = this;
-        const bookRouter = express.Router();
+        const purchaseRouter = express.Router();
 
-        bookRouter.route('/')
-            .get((req, res)=>{  
-
-            });   
-
-        bookRouter.route('/:id')
-            .get((req, res)=>{
-
-            }); 
-
-        bookRouter.route('/movie/:id')
-            .get((req, res)=>{
-              
-            });
-
-        bookRouter.route('/')
+        purchaseRouter.route('/')
             .post((req, res)=>{
 
                 const fullname = req.body.fullname;
@@ -120,14 +105,8 @@ export default class BookRoutes{
 
                 app.book(req, res);
             }); 
-            
 
-        bookRouter.route('/:id')
-            .delete((req, res)=>{
-                
-            });
-
-        return bookRouter;
+        return purchaseRouter;
     }
 
     async book(req, res){

@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 import path from 'path';
 
 //Models
-import Auditurium from './models/auditoriumModel';
+import Auditorium from './models/auditoriumModel';
 import Seat from './models/seatModel';
 import Movie from './models/movieModel';
 import Purchase from './models/purchasesModel';
@@ -18,7 +18,7 @@ import Secure from './models/secureSeatModel';
 //Routers
 import AuditoriumRouter from './routers/auditoriumRouter';
 import MovieRouter from './routers/movieRouter';
-import BookRouter from './routers/bookRouter';
+import PurchaseRoutes from './routers/purchaseRouter';
 import SecureRouter from './routers/secureRouter';
 
 //Services
@@ -132,7 +132,7 @@ export default class App {
     async initSQLAndRouters(app){
 
         const db = appConfig.sequelize;
-        const auditoriumModel =  new Auditurium().model(db);
+        const auditoriumModel =  new Auditorium().model(db);
         const seatModel = new Seat().model(db);
         const movieModel = new Movie().model(db);
         const purchaseModel = new Purchase().model(db);
@@ -152,7 +152,7 @@ export default class App {
         //Init Routers
         const auditoriumRouter = new AuditoriumRouter(auditoriumModel, seatModel, movieModel);
         const movieRouter = new MovieRouter(auditoriumModel, movieModel, seatModel);
-        const bookRouter = new BookRouter(customerModel, purchaseModel, seatModel, secureModel, auditoriumModel, movieModel);
+        const purchaseRouter = new PurchaseRoutes(customerModel, purchaseModel, seatModel, secureModel, auditoriumModel, movieModel);
         const secureRouter = new SecureRouter(seatModel, secureModel, auditoriumModel);
 
         await db.sync()
@@ -169,7 +169,7 @@ export default class App {
 
         app.use('/wibas-eterate/ticket/api/v1/movies', movieRouter.routes()); 
         app.use('/wibas-eterate/ticket/api/v1/auditoria', auditoriumRouter.routes()); 
-        app.use('/wibas-eterate/ticket/api/v1/purchase_ticket', bookRouter.routes()); 
+        app.use('/wibas-eterate/ticket/api/v1/purchase_ticket', purchaseRouter.routes()); 
         app.use('/wibas-eterate/ticket/api/v1/secure_ticket', secureRouter.routes()); 
 
         //Start Services

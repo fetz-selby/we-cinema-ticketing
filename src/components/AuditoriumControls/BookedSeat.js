@@ -6,7 +6,7 @@ import '../../styles/auditorium.css';
 const BookedSeat = (props) =>{
     return (
     <li className='selected-seat-item' onClick={()=>props.onSeatSelect(props.seatId)}>
-    B
+    
     </li>
     );
 }

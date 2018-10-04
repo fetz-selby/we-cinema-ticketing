@@ -20,43 +20,32 @@ export default class MovieRoutes{
 
         movieRouter.route('/:id')
             .get((req, res)=>{
-                //Check for id type
                 app.oneMovieRequest(res, req.params.id);
             }); 
 
-        movieRouter.route('/')
-            .post((req, res)=>{
-                res.status(200)
-                .json({
-                    success: false,
-                    message: 'no implementation'
-                })
-            }); 
-            
-
-        movieRouter.route('/:id')
-            .delete((req, res)=>{
-                const id = req.params.id;
-                app.MovieModel.findOne({where : {id, status: 'A'}})
-                .then((movie)=>{
-                    if(movie){
-                        movie.update({status: 'D'})
-                        .then(()=>{
-                            res.status(200)
-                            .json({
-                                success: true,
-                                message: 'movie deleted successfully'
-                            })
-                        })
-                    }else{
-                        res.status(400)
-                        .json({
-                            success: false,
-                            message: 'movie does not exist'
-                        })
-                    }
-                })
-            });
+        // movieRouter.route('/:id')
+        //     .delete((req, res)=>{
+        //         const id = req.params.id;
+        //         app.MovieModel.findOne({where : {id, status: 'A'}})
+        //         .then((movie)=>{
+        //             if(movie){
+        //                 movie.update({status: 'D'})
+        //                 .then(()=>{
+        //                     res.status(200)
+        //                     .json({
+        //                         success: true,
+        //                         message: 'movie deleted successfully'
+        //                     })
+        //                 })
+        //             }else{
+        //                 res.status(400)
+        //                 .json({
+        //                     success: false,
+        //                     message: 'movie does not exist'
+        //                 })
+        //             }
+        //         })
+        //     });
 
         return movieRouter;
     }

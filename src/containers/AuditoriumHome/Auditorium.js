@@ -13,10 +13,16 @@ import TotalSeatPrice from '../../components/AuditoriumControls/TotalSeatPrice';
 import AuditoriumTitle from '../../components/AuditoriumControls/AuditoriumTitle';
 
 class Auditorium extends Component{
+
+    componentWillMount(){
+        if(this.props.reservedCode){
+            window.location.href = '#/zahlung';
+        }
+    }
     
     renderSeats = () => {
         if(this.props.seats.length === 0){
-            window.location.href = '/';
+            window.location.href = '#/';
             return;
         }
         //Create a metrix
@@ -56,7 +62,7 @@ class Auditorium extends Component{
     showPaymentButton = () =>{
         if(this.props.totalPrice > 0){
             return (
-                <button className='payment-action-btn' onClick={()=>this.props.reserveSeat(this.props.selectedSeats)}>Buchen</button>
+                <button className='payment-action-btn' onClick={this.moveToNext}>Buchen</button>
             )
         }else{
             return null
@@ -65,9 +71,12 @@ class Auditorium extends Component{
     }
 
     moveToNext = () =>{
-        if(this.props.reservedCode.trim().length > 0){
-            this.props.showPayment(this.props.selectedSeats, this.props.movie, this.props.totalPrice, this.props.reservedCode);
-        }
+        this.props.reserveSeat(this.props.selectedSeats,
+                                this.props.movie,
+                                this.props.totalPrice);
+        // if(this.props.reservedCode.trim().length > 0){
+        //     this.props.showPayment(this.props.selectedSeats, this.props.movie, this.props.totalPrice, this.props.reservedCode);
+        // }
     }
 
     render(){
@@ -82,7 +91,6 @@ class Auditorium extends Component{
             <div className='footer-container'>
             {this.showPaymentButton()}
             </div>
-            {this.moveToNext()}
         </div>
         );
     }
