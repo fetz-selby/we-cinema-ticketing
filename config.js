@@ -7,7 +7,7 @@ const config = {
     secret : 'thequickfoxjumpedofthelazydog',
     cron_timer: 5,
     seat_secure_timer: 5,
-    prepare : false
+    prepare : true
 }
 
 const sequelize = new Sequelize(process.env.DB_NAME || 'WIBAS_TEST', process.env.DB_USER || 'wibas_admin', process.env.DB_PASSWORD || 'pa55w0rd', {
