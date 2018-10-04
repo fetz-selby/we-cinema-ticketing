@@ -228,12 +228,19 @@ class Payment extends Component{
         </div>
         )
     }
+
+    moveHome = () =>{
+        this.props.cancelBook(this.props.reservedCode);
+    }
     
     render(){
         return(
         <div className='payment-container'>
-            <PaymentSummary numberOfSeats={this.props.numberOfSeats} totalPrice={this.props.totalPrice} ></PaymentSummary>
-            {this.PaymentPage()}
+            <div className='payment-sub-container'>
+                <PaymentSummary numberOfSeats={this.props.numberOfSeats} totalPrice={this.props.totalPrice} ></PaymentSummary>
+                {this.PaymentPage()}
+            </div>
+            <button className='home-btn' onClick={this.moveHome}>Home</button>
         </div>
         );
     }
@@ -252,7 +259,8 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
     return {
-        pay : (securedCode, seats, name, card, code, month, year)=>dispatch(actionCreators.makePayment(securedCode, seats, name, card, code, month, year))
+        pay : (securedCode, seats, name, card, code, month, year)=>dispatch(actionCreators.makePayment(securedCode, seats, name, card, code, month, year)),
+        cancelBook : (secureCode)=>dispatch(actionCreators.cancelSeat(secureCode))
     }
 }
 

@@ -15,6 +15,9 @@ export const RESERVE_ERROR = 'RESERVE_ERROR';
 export const PAYMENT_SUCCESS = 'PAYMENT_SUCCESS';
 export const PAYMENT_FAILED = 'PAYMENT_FAILED';
 export const PAYMENT_ERROR = 'PAYMENT_ERROR';
+export const SEAT_CANCELLED = 'SEAT_CANCELLED';
+export const SEAT_CANCELLED_ERROR = 'SEAT_CANCELLED_ERROR';
+
 
 export const showAuditorium = (auditorium_id) =>{
     return dispatch => {
@@ -42,6 +45,28 @@ export const showAuditorium = (auditorium_id) =>{
     }
 }
 
+export const cancelSeat= (secureCode) =>{
+    return dispatch =>{
+        axios.post('http://localhost:8001/wibas-eterate/ticket/api/v1/tickets/cancel', {gen_code: secureCode})
+        .then((res)=>{
+
+            if(res.data !== undefined && res.data.success){
+                dispatch({
+                    type : SEAT_CANCELLED
+                });
+            }else{
+                dispatch({
+                    type : SEAT_CANCELLED,
+                });
+            }
+        }).catch(()=>{
+            dispatch({
+                type : SEAT_CANCELLED_ERROR
+            });
+        });
+    }
+} 
+
 export const onSeatBooked = (seatId) =>{
     return dispatch => {
         dispatch({type: SEAT_BOOKED, data: seatId});
@@ -56,7 +81,7 @@ export const showPayment = (selectedSeats, movie, totalPrice, reservedCode) =>{
 
 export const makePayment = (securedCode, seat, name, card, code, month, year) =>{
     return dispatch => {
-        axios.post('http://localhost:8001/wibas-eterate/ticket/api/v1/purchase_ticket', 
+        axios.post('http://localhost:8001/wibas-eterate/ticket/api/v1/tickets', 
         {fullname:name,
             card,
             code,
@@ -94,7 +119,7 @@ export const makePayment = (securedCode, seat, name, card, code, month, year) =>
 export const reserveSeat = (selectedSeats, movie, totalPrice) => {
     return dispatch => {
         const seats = selectedSeats;
-        axios.post('http://localhost:8001/wibas-eterate/ticket/api/v1/secure_ticket', {seats})
+        axios.post('http://localhost:8001/wibas-eterate/ticket/api/v1/tickets/secure', {seats})
         .then((res)=>{
 
             if(res.data !== undefined && res.data.success){

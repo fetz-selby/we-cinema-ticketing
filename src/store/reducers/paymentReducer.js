@@ -61,6 +61,13 @@ const reducer = (state = initialState, action) => {
 
         }
 
+        case actionTypes.SEAT_CANCELLED: {
+            window.location.href = '#/';
+            return {
+                ...state
+            }
+        }
+
         default: 
         return {...state}
     }

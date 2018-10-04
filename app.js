@@ -4,7 +4,6 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import session from 'express-session';
 import * as appConfig from './config';
-import jwt from 'jsonwebtoken';
 import path from 'path';
 
 //Models
@@ -18,8 +17,7 @@ import Secure from './models/secureSeatModel';
 //Routers
 import AuditoriumRouter from './routers/auditoriumRouter';
 import MovieRouter from './routers/movieRouter';
-import PurchaseRoutes from './routers/purchaseRouter';
-import SecureRouter from './routers/secureRouter';
+import TicketRoutes from './routers/ticketRouter';
 
 //Services
 import SeatScheduler from './services/seatScheduler';
@@ -39,7 +37,6 @@ export default class App {
         app.use(bodyParser.json({limit: '50mb', parameterLimit: 1000000}));
         app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit: 1000000}));
         app.use(cookieParser());
-        //app.use(expressValidator([]));
         app.use(session({resave:true, saveUninitialized: true, 
                         secret: 'thequickbrownfoxjumpedoverthelazydogs',
                         cookieName: 'session',
@@ -75,63 +72,10 @@ export default class App {
 
     }
 
-    validate(req, res, next){
-        const app = express();
-
-        //JSON Web Token Secret
-        app.set('token', appConfig.config.secret);
-
-         // check header or url parameters or post parameters for token
-        const token = req.body.token || req.query.token || req.headers['x-access-token'];
-        const app_id = req.body.app_id || req.query.app_id;
-        
-        // decode token
-        if(token) {
-    
-            // verifies secret and checks exp
-            jwt.verify(token, app.get('token'), function(err, decoded) {      
-                if (err) {
-                    return res.json({ success: false, message: 'Failed to authenticate token.' });    
-                } else {
-                    // if everything is good, save to request for use in other routes
-                    req.decoded = decoded; 
-                    next();
-
-                    //Check if app id is valid
-
-                    //next();
-                    //isAppIdValid(app_id,res,next);
-                    // const dbConfig = d.sequelize;
-                    // const appModel = models.appModel(dbConfig);
-
-                    // appModel.findOne({where : {id : app_id, status : 'A'}})
-                    // .then((app)=>{
-                    //     if(app){
-                    //         next();
-                    //     }else{
-                    //         console.log('App not registered');
-                    //         res.status(400).send('App not registered');
-                    //     }
-                    // })
-                }
-            });
-    
-        }else{
-    
-            // if there is no token
-            // return an error
-            return res.status(403).send({ 
-                success: false, 
-                message: 'No token provided.' 
-            });
-        }
-
-        //next();
-    }
-
     async initSQLAndRouters(app){
 
         const db = appConfig.sequelize;
+
         const auditoriumModel =  new Auditorium().model(db);
         const seatModel = new Seat().model(db);
         const movieModel = new Movie().model(db);
@@ -152,8 +96,7 @@ export default class App {
         //Init Routers
         const auditoriumRouter = new AuditoriumRouter(auditoriumModel, seatModel, movieModel);
         const movieRouter = new MovieRouter(auditoriumModel, movieModel, seatModel);
-        const purchaseRouter = new PurchaseRoutes(customerModel, purchaseModel, seatModel, secureModel, auditoriumModel, movieModel);
-        const secureRouter = new SecureRouter(seatModel, secureModel, auditoriumModel);
+        const ticketRouter = new TicketRoutes(customerModel, purchaseModel, seatModel, secureModel, auditoriumModel, movieModel);
 
         await db.sync()
 
@@ -169,8 +112,7 @@ export default class App {
 
         app.use('/wibas-eterate/ticket/api/v1/movies', movieRouter.routes()); 
         app.use('/wibas-eterate/ticket/api/v1/auditoria', auditoriumRouter.routes()); 
-        app.use('/wibas-eterate/ticket/api/v1/purchase_ticket', purchaseRouter.routes()); 
-        app.use('/wibas-eterate/ticket/api/v1/secure_ticket', secureRouter.routes()); 
+        app.use('/wibas-eterate/ticket/api/v1/tickets', ticketRouter.routes()); 
 
         //Start Services
 

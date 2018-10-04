@@ -1,6 +1,7 @@
 const assert = require('chai').assert;
 const axios = require('axios');
 const appConfig = require('../../config');
+const _ = require('lodash');
 
 const baseUrl = 'http://127.0.0.1:'+appConfig.config.SERVER_PORT+'/wibas-eterate/ticket/api/v1/';
 
@@ -58,8 +59,12 @@ describe('Secure and Purchase seat(s)', function(){
     })
 
     it('selected seats should be 2', function(){
-        selected_seats.push(seats[0].id);
-        selected_seats.push(seats[1].id);
+
+        //Select 2 unbooked seats
+        const unbookedSeats = _.filter(seats, {status: 'A'});
+
+        selected_seats.push(unbookedSeats[0].id);
+        selected_seats.push(unbookedSeats[1].id);
 
         assert.equal(selected_seats.length, 2)
     })
@@ -67,7 +72,7 @@ describe('Secure and Purchase seat(s)', function(){
 
     //Secure the seats
     it('secure seats for purchase', function(next){
-        axios.post(baseUrl+'secure_ticket/', {seats : selected_seats}).then((res)=>{
+        axios.post(baseUrl+'tickets/secure', {seats : selected_seats}).then((res)=>{
             if(res.data.success){
                 gen_code = res.data.result.code;
                 assert.isNotNull(gen_code);
@@ -84,7 +89,7 @@ describe('Secure and Purchase seat(s)', function(){
         const expire_month = '12';
         const expire_year = '2020';
 
-        axios.post(baseUrl+'purchase_ticket', {fullname,code,card,expire_month,expire_year,gen_code,seat: selected_seats}).then((res)=>{
+        axios.post(baseUrl+'tickets', {fullname,code,card,expire_month,expire_year,gen_code,seat: selected_seats}).then((res)=>{
             if(res.data){
                 assert.isNotNull(res.data);
                 next();

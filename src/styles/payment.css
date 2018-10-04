@@ -1,5 +1,26 @@
 .payment-container{
     display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 160px 100px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.payment-container .home-btn{
+    padding: 15px 30px;
+    color: #fefefe;
+    background: #d32f2f;
+    border: 1px solid #d32f2f;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 120px;
+    margin: 20px auto;
+}
+
+.payment-sub-container{
+    display: flex;
     -ms-flex-direction: row;
     flex-direction: row;
     padding: 160px 100px;
@@ -10,7 +31,7 @@
     margin: 0 auto;
 }
 
-.payment-container .payment-summary{
+.payment-sub-container .payment-summary{
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -18,45 +39,45 @@
     color: #e57373;
 }
 
-.payment-container .payment-summary .greeting{
+.payment-sub-container .payment-summary .greeting{
     font-size: 1.8em;
     font-style: italic;
 }
 
-.payment-container .payment-summary .message{
+.payment-sub-container .payment-summary .message{
     padding-top: 20px;
     font-size: 1.3em;
     font-style: italic;
 }
 
-.payment-container .payment-page{
+.payment-sub-container .payment-page{
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
     padding: 50px 50px;
 }
 
-.payment-container .payment-page .heading{
+.payment-sub-container .payment-page .heading{
     font-size: 1.4em;
     color: #555555;
     padding-bottom: 50px;
     letter-spacing: 1px;
 }
 
-.payment-container .payment-page .field-container{
+.payment-sub-container .payment-page .field-container{
     display: flex;
     flex-direction: row;
     padding: 15px 0;
 }
 
-.payment-container .payment-page .action-container{
+.payment-sub-container .payment-page .action-container{
     display: flex;
     -ms-flex-direction: row;
     flex-direction: row;
     padding: 80px 0 0 380px;
 }
 
-.payment-container .payment-page .action-container .pay-btn{
+.payment-sub-container .payment-page .action-container .pay-btn{
     padding: 15px 30px;
     color: #d32f2f;
     background: #ffffff;
@@ -65,7 +86,7 @@
     font-size: 1.1em;
 }
 
-.payment-container .payment-page .field-container .label{
+.payment-sub-container .payment-page .field-container .label{
     font-size: 1.1em;
     width: 150px;
     line-height: 2;
@@ -73,20 +94,20 @@
     letter-spacing: 1px;
 }
 
-.payment-container .payment-page .field-container .input-container{
+.payment-sub-container .payment-page .field-container .input-container{
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
 }
 
-.payment-container .payment-page .field-container .input-container .error{
+.payment-sub-container .payment-page .field-container .input-container .error{
     padding: 5px;
     color: #f44336;
     letter-spacing: 1px;
     font-size: 0.8em;
 }
 
-.payment-container .payment-page .field-container .input-container .inputs{
+.payment-sub-container .payment-page .field-container .input-container .inputs{
     width: 270px;
     height: 35px;
     font-size: 1.1em;
@@ -95,7 +116,7 @@
     letter-spacing: 1px;
 }
 
-.payment-container .payment-page .field-container .input-container .input-code{
+.payment-sub-container .payment-page .field-container .input-container .input-code{
     width: 40px;
     height: 35px;
     font-size: 1.1em;
@@ -104,7 +125,7 @@
     letter-spacing: 1px;
 }
 
-.payment-container .payment-page .field-container .input-container .select-month{
+.payment-sub-container .payment-page .field-container .input-container .select-month{
     width: 70px;
     font-size: 1.1em;
     color: #555555;
@@ -112,7 +133,7 @@
     margin-right: 30px;
 }
 
-.payment-container .payment-page .field-container .input-container .select-year{
+.payment-sub-container .payment-page .field-container .input-container .select-year{
     width: 100px;
     font-size: 1.1em;
     color: #555555;

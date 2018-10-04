@@ -30,7 +30,12 @@ export default class SecureRoutes{
               
             });
 
-        secureRouter.route('/')
+        secureRouter.route('/cancel')
+            .post((req, res)=>{
+                app.cancelSeat(res, req.body.gen_code);
+            });
+
+        secureRouter.route('/secure')
             .post((req, res)=>{
                 const seats = req.body.seats;
                 if(seats && Array.isArray(seats)){
@@ -50,6 +55,33 @@ export default class SecureRoutes{
             });
 
         return secureRouter;
+    }
+
+    async cancelSeat(res, code){
+        const app = this;
+
+        let seats = await app.SecureModel.findAll({where: {gen_code : code, status: 'A'}})
+        if(seats){
+            //Make all seat available
+            for(const seat of seats){
+              await app.SeatModel.update({status: 'A'}, {where : {id: seat.id, status: 'P'}});
+            }
+
+            await app.SecureModel.update({status: 'D'}, {where: {gen_code: code}});
+
+            res.status(200)
+            .json({
+                success: true,
+                message: 'seat cancelled successfully'
+            })
+        }else{
+            res.status(200)
+            .json({
+                success: true,
+                message: 'seat cancelled automatically'
+
+            })
+        }
     }
 
     async secureSeats(res, data){

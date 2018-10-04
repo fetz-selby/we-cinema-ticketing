@@ -115,7 +115,7 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch =>{
     return {
         showPayment: (selectedSeats, movie, totalPrice, reservedCode)=>dispatch(actionCreators.showPayment(selectedSeats, movie, totalPrice, reservedCode)),
-        reserveSeat: (selectedSeats)=>dispatch(actionCreators.reserveSeat(selectedSeats))
+        reserveSeat: (selectedSeats, movie, totalPrice)=>dispatch(actionCreators.reserveSeat(selectedSeats, movie, totalPrice))
     }
 }
 
