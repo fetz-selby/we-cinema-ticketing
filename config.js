@@ -10,7 +10,7 @@ const config = {
     prepare : false
 }
 
-const sequelize = new Sequelize(process.env.DB_NAME || 'TICKET_TEST', process.env.DB_USER || 'ticket_admin', process.env.DB_PASSWORD || 'pa55w0rd', {
+const sequelize = new Sequelize(process.env.DB_NAME || 'WIBAS_TEST', process.env.DB_USER || 'wibas_admin', process.env.DB_PASSWORD || 'pa55w0rd', {
     host: process.env.DB_HOST || 'localhost',
     //dialect: 'postgres',
     dialect: process.env.DB_DIALECT || 'mysql',
