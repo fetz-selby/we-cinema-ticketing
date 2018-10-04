@@ -22,8 +22,6 @@ const reducer = (state = initialState, action) => {
             const movie = action.data.movie;
             const reservedCode = action.data.reservedCode;
 
-            // window.location.href = '#/zahlung';
-
             return {
                 ...state,
                 movie,
@@ -49,7 +47,7 @@ const reducer = (state = initialState, action) => {
             const selectedSeats = action.data.selectedSeats;
 
             console.log('code => '+reservedCode);
-            
+
             window.location.href = '#/zahlung';
 
             return {
