@@ -22,7 +22,7 @@ export const SEAT_CANCELLED_ERROR = 'SEAT_CANCELLED_ERROR';
 export const showAuditorium = (auditorium_id) =>{
     return dispatch => {
         //Send a request
-        axios.get('http://localhost:8001/wibas-eterate/ticket/api/v1/auditoria/'+auditorium_id)
+        axios.get('/wibas-eterate/ticket/api/v1/auditoria/'+auditorium_id)
         .then((res)=>{
 
             if(res.data !== undefined && res.data.success){
@@ -47,7 +47,7 @@ export const showAuditorium = (auditorium_id) =>{
 
 export const cancelSeat= (secureCode) =>{
     return dispatch =>{
-        axios.post('http://localhost:8001/wibas-eterate/ticket/api/v1/tickets/cancel', {gen_code: secureCode})
+        axios.post('/wibas-eterate/ticket/api/v1/tickets/cancel', {gen_code: secureCode})
         .then((res)=>{
 
             if(res.data !== undefined && res.data.success){
@@ -81,7 +81,7 @@ export const showPayment = (selectedSeats, movie, totalPrice, reservedCode) =>{
 
 export const makePayment = (securedCode, seat, name, card, code, month, year) =>{
     return dispatch => {
-        axios.post('http://localhost:8001/wibas-eterate/ticket/api/v1/tickets', 
+        axios.post('/wibas-eterate/ticket/api/v1/tickets', 
         {fullname:name,
             card,
             code,
@@ -119,7 +119,7 @@ export const makePayment = (securedCode, seat, name, card, code, month, year) =>
 export const reserveSeat = (selectedSeats, movie, totalPrice) => {
     return dispatch => {
         const seats = selectedSeats;
-        axios.post('http://localhost:8001/wibas-eterate/ticket/api/v1/tickets/secure', {seats})
+        axios.post('/wibas-eterate/ticket/api/v1/tickets/secure', {seats})
         .then((res)=>{
 
             if(res.data !== undefined && res.data.success){
@@ -151,7 +151,7 @@ export const onSeatUnBooked = (seatId) =>{
 
 export const loadMovies = () =>{
     return (dispatch)=>{
-        axios.get('http://localhost:8001/wibas-eterate/ticket/api/v1/movies')
+        axios.get('/wibas-eterate/ticket/api/v1/movies')
         .then((res)=>{
 
             if(res.data !== undefined && res.data.success){
