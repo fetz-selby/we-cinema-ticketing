@@ -21,20 +21,25 @@
 ### configuring MySQL ###
 
 1. Create Database with name WIBAS_TEST
+
 `CREATE DATABASE WIBAS_TEST CHARACTER SET latin1 COLLATE latin1_swedish_ci`
-2. Create user for accessing the Database
+2. Create user for accessing the Database 
+
 `CREATE USER 'wibas_admin'@'localhost' IDENTIFIED BY 'pa55w0rd'`
-3. Enable privileges
+3. Enable privileges 
+
 `GRANT ALL PRIVILEGES ON * . * TO 'wibas_admin'@'localhost`
-4. Flush
+4. Flush 
+
 `FLUSH PRIVILEGES`
 
 
 ### configuring wibas-online-cinema-ticket application ###
 
 1. Locate `config.js` on the root directory of the application.
+
    *change the SERVER_PORT if the default is unavailable*
-2. On first run of the application, prepare MUST be changed to true. This is to initialize the database with `Vorstellungen.txt` and the three files(Hall files) in auditoria directory.
+2. On first run of the application, prepare MUST be changed to true. This is to initialize the database with `Vorstellungen.txt` and the three files(Hall files) in auditoria directory(`SAAL 1.txt, SAAL 2.txt, SAAL 3.txt`).
 3. Make sure the DB_NAME, DB_USER and DB_PASSWORD matches our database(MySQL) we just created.
 4. Change directory into wibas-eterate directory, and execute 
 `npm run start-app`
@@ -42,4 +47,23 @@
 
 **All test MUST run successful before using the application**
 
-The application will build, compile and run. Open your browser and visit your localhost or you loopback with the specified port.
+The application will build, compile and run. Open your browser and visit your localhost or you loopback(127.0.0.1) with the specified port.
+
+## Overview of wibas online cinema ticket application ##
+In simplifying, and solving some of the worlds problems, wibas-eterate has built an online ticket booking application. This allows customers to purchase movie tickets at the convience. Requirement needed to purchase a ticket is a credit/debit card. Below are the stages
+
+The entire process is in four stages.
+1. Select a time base on film you're interested
+2. Choose a seat where you'd want to enjoy the film
+3. Make payment with your debit/credit card
+    * payment MUST be made within 5 minutes(configurable)  otherwise, seat will be available for other customers.
+4. View or download your summary/invoice
+
+## Backlogs ##
+* create admin interface for uploading `Vorstellungen.txt` and the hall files. `SAAL 1.txt, SAAL 2.txt, SAAL 3.txt`.
+* use json structure for `Vorstellungen.txt`.
+* implement real-time database and timed-out sessions using firebase and json web tokens respectively.
+* upgrade the UI/UX of the application
+
+
+<a href='35.231.169.193:7001'>view demo</a>
