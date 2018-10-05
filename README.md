@@ -39,12 +39,16 @@
 1. Locate `config.js` on the root directory of the application.
 
    *change the SERVER_PORT if the default is unavailable*
+     
 2. On first run of the application, prepare MUST be changed to true. This is to initialize the database with `Vorstellungen.txt` and the three files(Hall files) in auditoria directory(`SAAL 1.txt, SAAL 2.txt, SAAL 3.txt`).
 
+  
 3. Make sure the DB_NAME, DB_USER and DB_PASSWORD matches our database(MySQL) we just created.
 
+  
 4. Change directory into wibas-eterate directory, and execute 
 `npm run start-app`
+  
 
 5. Run the test scripts to assert all API functionalities. They are located in `wibas-eterate/test/routers`. Run `mocha movieRouterTest.js`,  `mocha auditoriumRouterTest.js` and  `mocha ticketRouterTest.js`
 
