@@ -117,9 +117,9 @@ export default class App {
             await db.sync();
         }
 
-        app.use('/wibas-eterate/ticket/api/v1/movies', movieRouter.routes()); 
-        app.use('/wibas-eterate/ticket/api/v1/auditoria', auditoriumRouter.routes()); 
-        app.use('/wibas-eterate/ticket/api/v1/tickets', ticketRouter.routes()); 
+        app.use('/wibas-etarate/ticket/api/v1/movies', movieRouter.routes()); 
+        app.use('/wibas-etarate/ticket/api/v1/auditoria', auditoriumRouter.routes()); 
+        app.use('/wibas-etarate/ticket/api/v1/tickets', ticketRouter.routes()); 
 
         //Start Services
 
