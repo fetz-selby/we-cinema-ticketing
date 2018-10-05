@@ -48,7 +48,7 @@
 
    *change the SERVER_PORT if the default is unavailable*
      
-2. On first run of the application, edit `config.js` and set `prepare:true`. This is to initialize the database with `Vorstellungen.txt` and the three files(Hall files) in auditoria directory(`SAAL 1.txt, SAAL 2.txt, SAAL 3.txt`).
+2. On first run of the application, edit `config.js` and set `prepare:true`. This is to initialize the database with `Vorstellungen.txt` and the three files(Hall files) in auditoria directory located in `/resources` directory(`SAAL 1.txt, SAAL 2.txt, SAAL 3.txt`).
 
   
 3. Make sure the DB_NAME, DB_USER and DB_PASSWORD matches our database(MySQL) we just created.
