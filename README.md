@@ -50,7 +50,7 @@
 The application will build, compile and run. Open your browser and visit your localhost or you loopback(127.0.0.1) with the specified port.
 
 ## Overview of wibas online cinema ticket application ##
-In simplifying, and solving some of the worlds problems, wibas-eterate has built an online ticket booking application. This allows customers to purchase movie tickets at the convience. Requirement needed to purchase a ticket is a credit/debit card. Below are the stages
+In simplifying, and solving some of the worlds problems, wibas-eterate has built an online ticket booking application. This allows customers to purchase movie tickets at their convenience. Requirement needed to purchase a ticket is a credit/debit card. Below are the stages
 
 The entire process is in four stages.
 1. Select a time base on film you're interested
