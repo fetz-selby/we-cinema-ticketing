@@ -23,15 +23,23 @@
 1. Create Database with name WIBAS_TEST
 
 `CREATE DATABASE WIBAS_TEST CHARACTER SET latin1 COLLATE latin1_swedish_ci`
+
+  
 2. Create user for accessing the Database 
 
 `CREATE USER 'wibas_admin'@'localhost' IDENTIFIED BY 'pa55w0rd'`
+
+  
 3. Enable privileges 
 
 `GRANT ALL PRIVILEGES ON * . * TO 'wibas_admin'@'localhost`
+
+  
 4. Flush 
 
 `FLUSH PRIVILEGES`
+
+  
 
 
 ### configuring wibas-online-cinema-ticket application ###
