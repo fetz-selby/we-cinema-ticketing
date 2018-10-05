@@ -94,6 +94,14 @@ const reducer = (state = initialState, action) => {
                 ...state
             }
         }
+
+        case actionTypes.RESERVE_ERROR:{
+            alert('gebucht');
+            window.location.href = '#/';
+            return {
+                ...state
+            }
+        }
          
         case actionTypes.SEAT_UNBOOKED: {
             const seat = _.find(state.seats, {id: action.data});
