@@ -3,7 +3,7 @@ const axios = require('axios');
 const appConfig = require('../../config');
 const _ = require('lodash');
 
-const baseUrl = 'http://127.0.0.1:'+appConfig.config.SERVER_PORT+'/wibas-eterate/ticket/api/v1/';
+const baseUrl = 'http://127.0.0.1:'+appConfig.config.SERVER_PORT+'/wibas-etarate/ticket/api/v1/';
 
 console.log('baseUrl => '+baseUrl);
 
