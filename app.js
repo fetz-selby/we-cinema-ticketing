@@ -38,7 +38,7 @@ export default class App {
         app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit: 1000000}));
         app.use(cookieParser());
         app.use(session({resave:true, saveUninitialized: true, 
-                        secret: 'thequickbrownfoxjumpedoverthelazydogs',
+                        secret: appConfig.config.secret,
                         cookieName: 'session',
                         duration: 30*60*1000, 
                         activeDuration: 5*60*1000, 
