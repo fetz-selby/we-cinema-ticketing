@@ -2,7 +2,7 @@
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
-    padding: 160px 100px;
+    padding: 0 100px;
     -ms-flex-pack: center;
     justify-content: center;
     margin: 0 auto;
@@ -23,11 +23,10 @@
     display: flex;
     -ms-flex-direction: row;
     flex-direction: row;
-    padding: 160px 100px;
+    padding: 10px 0;
     -ms-flex-pack: center;
     justify-content: center;
     border: 1px solid #d2d2d2;
-    width: 70%;
     margin: 0 auto;
 }
 

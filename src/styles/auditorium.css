@@ -1,5 +1,5 @@
 .auditorium-container{
-    padding: 50px 100px;
+    padding: 0 20px;
     margin: 10px 0 10px 0;    
     display: -webkit-box;
     display: -moz-box;
@@ -21,7 +21,7 @@
     font-size: 1.8em;
     width: 75%;
     text-align: center;
-    line-height: 7;
+    line-height: 5;
     letter-spacing: 1px;
     color: #d32f2f;
 }
@@ -164,9 +164,9 @@
     display: flex;
     -webkit-flex-flow: row wrap;
     background: #ffffff;
-    padding: 20px;
+    padding: 0;
     height: 40px;
-    margin-top: 8px;
+    margin-top: 2px;
     list-style: none;
     
     line-height: 2;
@@ -225,7 +225,7 @@
     display: flex;
     -webkit-flex-flow: row wrap;
     flex-direction: row-reverse;
-    padding: 10px 20px;
+    padding: 2px 0;
 }
 
 .auditorium-container .footer-container .payment-action-btn{

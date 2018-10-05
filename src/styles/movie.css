@@ -6,7 +6,7 @@
     display: -webkit-flex;
     display: flex;
     flex-direction: column;
-    padding: 160px 100px;
+    padding: 50px 30px;
 }
 
 .movie-container .movie-header{
@@ -52,7 +52,7 @@
 .movie-container .movie-tile-container .movie-title-item{
     width: 300px;
     text-align: left;
-    font-size: 1.4em;
+    font-size: 1.1em;
     line-height: 3.6;
     padding: 10px;
     letter-spacing: 2px;
