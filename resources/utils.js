@@ -273,7 +273,7 @@ export function getHTMLPaymentReciept(name,
     <div class='container'>
         <div class='title'>Auftrag xGyL45</div>
         <div class='clearfix'></div>
-        <div class='company'>Online Cinema Ticket - wibas eterate</div>
+        <div class='company'>Online Cinema Ticket - wibas etarate</div>
         <div class='spacer'></div>
         <div class='date'>Datum: ${date}</div>
         <div class='clearfix'></div>

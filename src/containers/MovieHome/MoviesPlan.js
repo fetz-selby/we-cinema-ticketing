@@ -21,7 +21,7 @@ class MoviesPlan extends Component{
     render(){
         return(
         <div className='movie-container'>
-            <MovieHeader caption='Online Cinema Ticket' pref='wibas eterate'></MovieHeader>
+            <MovieHeader caption='Online Cinema Ticket' pref='wibas etarate'></MovieHeader>
             {this.renderMovies(this.props.allMovies)}
         </div>
         );

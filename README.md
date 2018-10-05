@@ -11,8 +11,8 @@
 1. Install Node JS https://nodejs.org/en/
 2. For building `npm i webpack -g`
 3. For running test scripts `npm i mocha -g`
-4. Clone the repo `git clone https://github.com/fetz-selby/we-cinema-ticketing.git wibas-eterate`
-5. `cd wibas-eterate`
+4. Clone the repo `git clone https://github.com/fetz-selby/we-cinema-ticketing.git wibas-etarate`
+5. `cd wibas-etarate`
 6. `npm install`
 
 
@@ -54,18 +54,18 @@
 3. Make sure the DB_NAME, DB_USER and DB_PASSWORD matches our database(MySQL) we just created.
 
   
-4. Change directory into wibas-eterate directory, and execute 
+4. Change directory into wibas-etarate directory, and execute 
 `npm run start-app`
   
 
-5. Run the test scripts to assert all API functionalities. They are located in `wibas-eterate/test/routers`. Run `mocha movieRouterTest.js`,  `mocha auditoriumRouterTest.js` and  `mocha ticketRouterTest.js`
+5. Run the test scripts to assert all API functionalities. They are located in `wibas-etarate/test/routers`. Run `mocha movieRouterTest.js`,  `mocha auditoriumRouterTest.js` and  `mocha ticketRouterTest.js`
 
 **All test MUST run successful before using the application**
 
 The application will build, compile and run. Open your browser and visit your localhost or you loopback(127.0.0.1) with the specified port.
 
 ## Overview of wibas online cinema ticket application ##
-In simplifying, and solving some of the worlds problems, wibas-eterate has built an online ticket booking application. This allows customers to purchase movie tickets at their convenience. Requirement needed to purchase a ticket is a credit/debit card. Below are the stages
+In simplifying, and solving some of the worlds problems, wibas-etarate has built an online ticket booking application. This allows customers to purchase movie tickets at their convenience. Requirement needed to purchase a ticket is a credit/debit card. Below are the stages
 
 The entire process is in four stages.
 1. Select a time base on film you're interested
