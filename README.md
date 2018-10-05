@@ -65,5 +65,13 @@ The entire process is in four stages.
 * implement real-time database and timed-out sessions using firebase and json web tokens respectively.
 * upgrade the UI/UX of the application
 
+[view demo](http://35.231.169.193:7001)
 
-<a href='35.231.169.193:7001'>view demo</a>
+## Technologies and Frameworks used ##
+* [React](https://reactjs.org/)
+* [Redux](https://redux.js.org/)
+* [NodeJS](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
+* [Sequelize](http://docs.sequelizejs.com/)
+* [JWT](https://jwt.io/)
+

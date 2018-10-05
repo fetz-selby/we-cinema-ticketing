@@ -101,7 +101,7 @@ export const makePayment = (securedCode, seat, name, card, code, month, year) =>
                     type : PAYMENT_SUCCESS,
                     data: res.data
                 });
-            }else{
+            }else if(!res.data.success){
                 dispatch({
                     type : PAYMENT_FAILED,
                     data: null

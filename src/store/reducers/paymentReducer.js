@@ -57,8 +57,13 @@ const reducer = (state = initialState, action) => {
                 totalPrice,
                 selectedSeats
             }
+        }
 
-
+        case actionTypes.PAYMENT_FAILED:{
+            window.location.href = '#/';
+            return {
+                ...state
+            }
         }
 
         case actionTypes.SEAT_CANCELLED: {
