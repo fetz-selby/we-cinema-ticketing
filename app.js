@@ -98,9 +98,14 @@ export default class App {
         const movieRouter = new MovieRouter(auditoriumModel, movieModel, seatModel);
         const ticketRouter = new TicketRoutes(customerModel, purchaseModel, seatModel, secureModel, auditoriumModel, movieModel);
 
-        await db.sync()
+        //await db.sync()
 
         if(appConfig.config.prepare){     
+
+            //Drop all tables if exist
+            await db.drop();
+            await db.sync({force: true});
+
             //Init DB
             const vorstellungen = path.resolve('./resources/Vorstellungen.txt');
             const auditoria = path.resolve('./resources/auditoria');
@@ -108,6 +113,8 @@ export default class App {
             //Run data extractor
             const dataExtractor = new DataExtractor(auditoria, vorstellungen, auditoriumModel, movieModel, seatModel);
             dataExtractor.initDB();
+        }else{
+            await db.sync();
         }
 
         app.use('/wibas-eterate/ticket/api/v1/movies', movieRouter.routes()); 
