@@ -85,7 +85,14 @@ const reducer = (state = initialState, action) => {
                 reservedCode
             }
 
+        }
 
+        case actionTypes.NO_SEAT_RESERVED:{
+            alert('gebucht');
+            window.location.href = '#/';
+            return {
+                ...state
+            }
         }
          
         case actionTypes.SEAT_UNBOOKED: {

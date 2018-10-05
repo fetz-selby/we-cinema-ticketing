@@ -40,6 +40,15 @@ const reducer = (state = initialState, action) => {
             }
         }
 
+        case actionTypes.PAYMENT_FAILED:{
+            alert('Zahlungsfehler');
+            window.location.href = '#/';
+
+            return {
+                ...state
+            }
+        }
+
         case actionTypes.SEAT_RESERVED:{
             const reservedCode = action.data.code;
             const movie = action.data.movie;
