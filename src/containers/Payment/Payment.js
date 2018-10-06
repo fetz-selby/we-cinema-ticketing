@@ -18,7 +18,7 @@ class Payment extends Component{
         showCodeError: true,
         showNameError: true,
         showMonthError: false,
-        showYearError: false,
+        showYearError: true,
         showPayBtn: false
     }
 
@@ -68,48 +68,46 @@ class Payment extends Component{
     }
 
     nameChangeHandler = (evt) =>{
-        this.validate();
 
         this.setState({
             name: evt.target.value
         })
 
+        this.validate();
     }
 
     cardChangeHandler = (evt) =>{
-        this.validate();
 
         this.setState({
             cardNumber: evt.target.value
         })
 
+        this.validate();
     }
 
     codeChangeHandler = (evt) =>{
-        this.validate();
 
         this.setState({
             code: evt.target.value
         })
-
+        this.validate();
     }
 
     onMonthChangeHandler = (evt) =>{
-        this.validate();
 
         this.setState({
             month: evt.target.value
         })
 
+        this.validate();
     }
 
     onYearChangeHandler = (evt) =>{
-        this.validate();
 
         this.setState({
             year: evt.target.value
         })
-
+        this.validate();
     }
 
     validate = () =>{
@@ -141,6 +139,19 @@ class Payment extends Component{
             })
         }
 
+        //Check date
+        if(!this.isDateValid(this.state.month, this.state.year)){
+            this.setState({
+                showYearError: true
+            })
+
+            return;
+        }else{
+            this.setState({
+                showYearError: false
+            })
+        }
+
         //Check code
         if(this.state.code.trim().length < 2){
             this.setState({
@@ -160,6 +171,16 @@ class Payment extends Component{
 
     }
 
+    isDateValid = (month, year) =>{
+        const today =  new Date();
+        const inputDate = new Date(parseInt(year), parseInt(month), 1);
+
+        if(today > inputDate){
+            return false;
+        }
+        return true;
+    }
+
     onPayHandler = () =>{
         this.props.pay(this.props.reservedCode, 
             this.props.selectedSeats, 
@@ -170,7 +191,7 @@ class Payment extends Component{
             this.state.year);
     }
 
-    getNumber(val, del){
+    getNumber = (val, del) =>{
         if(val){
             const arr = val.split(del);
             let str = '';
@@ -210,7 +231,7 @@ class Payment extends Component{
                 </div>
                 <div className='input-container'>
                     {this.loadYear()}
-                    <div className={this.state.showYearError?'error':'hide'}></div>
+                    <div className={this.state.showYearError?'error':'hide'}>Abgelaufene Karte</div>
                 </div>
             </div>
 

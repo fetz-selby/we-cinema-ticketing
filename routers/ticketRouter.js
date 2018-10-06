@@ -102,6 +102,16 @@ export default class TicketRoutes{
                     return;
                 }
 
+                if(!this.isDateValid(expire_month, expire_year)){
+                    res.status(400)
+                    .json({
+                        success: false,
+                        message: 'expired card date'
+                    })
+
+                    return;
+                }
+
                 if(!(seats && seats.length > 0 && Array.isArray(seats))){
                     res.status(400)
                     .json({
@@ -126,6 +136,16 @@ export default class TicketRoutes{
             }); 
 
         return purchaseRouter;
+    }
+
+    isDateValid(month, year){
+        const today =  new Date();
+        const inputDate = new Date(parseInt(year), parseInt(month), 1);
+
+        if(today > inputDate){
+            return false;
+        }
+        return true;
     }
 
     async book(req, res){
