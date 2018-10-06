@@ -32,11 +32,10 @@ class Payment extends Component{
         //Create monts
         const months = [];
         for(let i=1; i<=12; i++){
-            const it = i.toString();
-            if(it.length === 1){
-                months.push('0'+it);
+            if(i < 10){
+                months.push('0'+i);
             }else{
-                months.push(it);
+                months.push(i);
             }
         }
 
