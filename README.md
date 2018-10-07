@@ -89,4 +89,7 @@ The entire process is in four stages.
 * [Express](https://expressjs.com/)
 * [Sequelize](http://docs.sequelizejs.com/)
 * [JWT](https://jwt.io/)
+* [Webpack](https://webpack.js.org/)
+* [Mocha](https://mochajs.org/)
+* [Chai](https://www.chaijs.com/)
 
