@@ -14,7 +14,6 @@ import {Provider} from 'react-redux';
 const logger = store => {
     return next => {
         return action => {
-            console.log('[Middleware]');
             next(action);
         }
     }
