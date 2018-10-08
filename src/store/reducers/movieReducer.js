@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actions';
 
 const initialState = {
-    movies: []
+    movies: [],
+    isLoading: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,7 +11,15 @@ const reducer = (state = initialState, action) => {
             const movies = action.data;
             return {
                 ...state,
-                movies
+                movies,
+                isLoading: false
+            }
+        }
+
+        case actionTypes.AUDITORIUM_LOADING:{
+            return {
+                ...state,
+                isLoading: true
             }
         }
 

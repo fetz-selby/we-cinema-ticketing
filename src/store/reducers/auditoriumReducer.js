@@ -13,7 +13,8 @@ const initialState = {
     seats: [],
     selectedSeats: [],
     totalPrice: 0.0,
-    reservedCode: ''
+    reservedCode: '',
+    isLoading: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +34,7 @@ const reducer = (state = initialState, action) => {
             const selectedSeats = [];
             const totalPrice = 0.00;
             const reservedCode = '';
+            const isLoading = false;
 
             //Redirect
             window.location.href = '#/belegungsplan'
@@ -50,7 +52,8 @@ const reducer = (state = initialState, action) => {
                 price,
                 totalPrice,
                 selectedSeats,
-                reservedCode
+                reservedCode,
+                isLoading
             }
         }
 
@@ -130,6 +133,13 @@ const reducer = (state = initialState, action) => {
                 selectedSeats: selectSeats,
                 totalPrice
             };
+        }
+
+        case actionTypes.PAYMENT_LOADING:{
+            return {
+                ...state,
+                isLoading: true
+            }
         }
 
         default: 

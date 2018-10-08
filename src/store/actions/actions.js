@@ -17,6 +17,8 @@ export const PAYMENT_FAILED = 'PAYMENT_FAILED';
 export const PAYMENT_ERROR = 'PAYMENT_ERROR';
 export const SEAT_CANCELLED = 'SEAT_CANCELLED';
 export const SEAT_CANCELLED_ERROR = 'SEAT_CANCELLED_ERROR';
+export const AUDITORIUM_LOADING = 'AUDITORIUM_LOADING';
+export const PAYMENT_LOADING = 'PAYMENT_LOADING';
 
 
 export const showAuditorium = (auditorium_id) =>{
@@ -171,5 +173,17 @@ export const loadMovies = () =>{
                 data: null
             });
         });
+    }
+}
+
+export const loadingAuditorium = () => {
+    return dispatch =>{
+        dispatch({type: AUDITORIUM_LOADING})
+    }
+}
+
+export const loadingPayment = () => {
+    return dispatch =>{
+        dispatch({type: PAYMENT_LOADING})
     }
 }

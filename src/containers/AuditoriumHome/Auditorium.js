@@ -11,6 +11,7 @@ import CounterMargin from '../../components/AuditoriumControls/CounterMargin';
 import MovieSummary from '../../components/AuditoriumControls/MovieSummary';
 import TotalSeatPrice from '../../components/AuditoriumControls/TotalSeatPrice';
 import AuditoriumTitle from '../../components/AuditoriumControls/AuditoriumTitle';
+import Overlay from '../../components/Misc/Overlay';
 
 class Auditorium extends Component{
 
@@ -71,28 +72,27 @@ class Auditorium extends Component{
     }
 
     moveToNext = () =>{
+        this.props.loadingPayment();
         this.props.reserveSeat(this.props.selectedSeats,
                                 this.props.movie,
                                 this.props.totalPrice);
-        // if(this.props.reservedCode.trim().length > 0){
-        //     this.props.showPayment(this.props.selectedSeats, this.props.movie, this.props.totalPrice, this.props.reservedCode);
-        // }
     }
 
     render(){
-        return(
-        <div className='auditorium-container'>
-            <div className='auditorium-header-container'>
-                <MovieSummary movie={this.props.movie} time={this.props.time} price={this.props.price}></MovieSummary>
-                <AuditoriumTitle title={this.props.auditoriumName}></AuditoriumTitle>
-            </div>
-            {this.renderSeats()}
-            <TotalSeatPrice price={this.props.totalPrice}></TotalSeatPrice>
-            <div className='footer-container'>
-            {this.showPaymentButton()}
-            </div>
-        </div>
-        );
+            return(
+                <div className='auditorium-container'>
+                    <div className='auditorium-header-container'>
+                        <MovieSummary movie={this.props.movie} time={this.props.time} price={this.props.price}></MovieSummary>
+                        <AuditoriumTitle title={this.props.auditoriumName}></AuditoriumTitle>
+                    </div>
+                    {this.renderSeats()}
+                    <TotalSeatPrice price={this.props.totalPrice}></TotalSeatPrice>
+                    <div className='footer-container'>
+                    {this.showPaymentButton()}
+                    </div>
+                    <Overlay isLoading={this.props.isLoading}></Overlay>
+                </div>
+                );
     }
 }
 
@@ -108,13 +108,14 @@ const mapStateToProps = state =>{
        movie : state.auditorium.movie,
        totalPrice : state.auditorium.totalPrice,
        selectedSeats : state.auditorium.selectedSeats,
-       reservedCode : state.auditorium.reservedCode
+       reservedCode : state.auditorium.reservedCode,
+       isLoading: state.auditorium.isLoading
     }
 }
 
 const mapDispatchToProps = dispatch =>{
     return {
-        showPayment: (selectedSeats, movie, totalPrice, reservedCode)=>dispatch(actionCreators.showPayment(selectedSeats, movie, totalPrice, reservedCode)),
+        loadingPayment: ()=>dispatch(actionCreators.loadingPayment()),
         reserveSeat: (selectedSeats, movie, totalPrice)=>dispatch(actionCreators.reserveSeat(selectedSeats, movie, totalPrice))
     }
 }
